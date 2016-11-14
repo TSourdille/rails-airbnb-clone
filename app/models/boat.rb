@@ -1,7 +1,8 @@
 class Boat < ApplicationRecord
   belongs_to :user
-  has_many :bookings, :availabilities
-  has_one :user, through: :bookings
+  has_many :bookings
+  has_many :availabilities
+  # has_one :user, through: :booking
 
-  validates :type, :name, :city, :capacity, :day_rate, :user_id, presence: true
+  validates :boat_type, :name, :city, :capacity, :day_rate, :user_id, presence: true
 end
