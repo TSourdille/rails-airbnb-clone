@@ -1,8 +1,13 @@
 <div class="navbar-wagon">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "logo.png" %>
+    <%= image_tag "logo_boat.png" %>
   <% end %>
+
+  <%= link_to root_path, id: "title" do %>
+    <h4>SailAway</h4>
+  <% end %>
+
 
 
   <!-- Right Navigation -->
@@ -61,7 +66,7 @@
     <% end %>
 
     <!-- Button (call-to-action) -->
-    <%= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <%= link_to t(".top_call_to_action", default: "List your boat"), new_boat_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 
   <!-- Dropdown list appearing on mobile only -->
@@ -76,4 +81,3 @@
     </div>
   </div>
 </div>
-
