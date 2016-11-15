@@ -1,0 +1,43 @@
+#banner_picture {
+  width: 100%;
+  height: 70%
+}
+
+.site-content {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+
+}
+
+.banner-container {
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  height: 60vh;
+  background-color: red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url(images/banner_picture.png);
+}
+
+.log-box {
+  width: 25%;
+  min-width: 15%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0, 0.65);
+  margin-right: 45%;
+}
+
+.text-box {
+  font-family: Bariol;
+  font-size: 40px;
+  color: #D23333;
+  max-width: 20%;
+  text-align: center;
+}
