@@ -1,8 +1,8 @@
 <h1>List your boat</h1>
 
-<%= simple_form_for [@user, @boat] do |f| %>
+<%= simple_form_for @boat do |f| %>
   <%= f.input :name %>
-  <%= f.input :boat_type %>
+  <%= f.input :boat_type, collection: Boat::BOAT_TYPES %>
   <%= f.input :city %>
   <%= f.input :capacity %>
   <%= f.input :description, as: :text %>
