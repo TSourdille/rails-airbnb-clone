@@ -30,18 +30,18 @@ def seed_boats
   Boat.destroy_all
   puts "Seeding 20 boats from anywhere in France"
 
-  boats = JSON.parse(File.read("db/samboat_2016-11-15-10-03.json"))
-  users = User.first(3)
+  boats = JSON.parse(File.read("db/samboat_2016-11-15-15-39.json"))
+  users = User.first(2)
   users.each_with_index do |user, index|
-    case (index % 3)
+    case (index % 2)
     when 0
-      boats = boats[0..10]
+      my_boats = boats[0...3]
     when 1
-      boats = boats[10..18]
+      my_boats = boats[4...6]
     when 2
-      boats = boats[18...20]
+      my_boats = boats[7...9]
     end
-    boats.each do |boat|
+    my_boats.each do |boat|
       specs = ""
       boat["specs"].each { |k, v| specs << "#{k}: #{v}\n" }
       equipment = ""

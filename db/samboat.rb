@@ -96,7 +96,7 @@ class SamboatScraper
   def store_json
     filepath = Time.now.strftime('db/samboat_%Y-%m-%d-%H-%M')
     File.open(filepath + '.json', 'w') do |file|
-      file.write(JSON.generate(@boats))
+      file.write(JSON.generate(@boats.first(10)))
     end
   end
 
