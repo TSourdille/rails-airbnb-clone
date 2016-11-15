@@ -8,7 +8,7 @@ class BoatsController < ApplicationController
   def show
     @boat = Boat.find(params[:id])
     @user = current_user
-    @bookings = Booking.all
+    @bookings = @boat.bookings
     @booking = @boat.bookings.new
   end
 
@@ -18,11 +18,11 @@ class BoatsController < ApplicationController
   end
 
   def create
-    user = current_user
-    boat = user.boats.new(boat_params)
-    if boat.save
+    @user = current_user
+    @boat = @user.boats.new(boat_params)
+    if @boat.save
       flash[:notice] = "Your boat has been added to our listing!"
-      redirect_to boat
+      redirect_to @boat
     else
       render 'new'
     end
