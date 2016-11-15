@@ -1,6 +1,16 @@
 <div class="banner-container" style="background-image: url(<%= asset_path 'banner_picture.png' %>) ">
 
   <div class="log-box">
+    <form>
+
+      <p class= "text-center">Destination:</p><br>
+      <input type="text" name="destination"><br>
+      <br>
+      <br>
+      <%= link_to boats_path do%>
+      <input type="submit" value="Find Boats" class= "center-block btn btn-warning">
+      <% end %>
+    </form>
 
   </div>
 
