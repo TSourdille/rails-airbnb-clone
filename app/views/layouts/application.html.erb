@@ -16,7 +16,7 @@
     <div class="container site-content"><%= yield %></div>
     <%= render 'shared/footer' %>
   </div>
-  <%= cloudinary_js_config %> <!-- Append this after the main `javascript_include_tag`. -->
   <%= javascript_include_tag 'application' %>
+  <%= cloudinary_js_config %> <!-- Append this after the main `javascript_include_tag`. -->
 </body>
 </html>

@@ -6,15 +6,13 @@
         <h1><%= @boat.name %></h1>
       </div>
       <div>
-        <% if @boat.photo? %>
-          <%= cl_image_tag @boat.photo.path, width: 200, height: 300, crop: :fill %>
+        <% if @boat.photos? %>
+          <% @boat.photos.each do |photo| %>
+            <%= cl_image_tag photo.path, width: 200, height: 300, crop: :fill %>
+          <% end %>
         <% end %>
         <%= link_to "Index", boats_path, class: "btn btn-danger" %>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
