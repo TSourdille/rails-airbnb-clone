@@ -3,8 +3,8 @@
     <% @boats.each do |boat| %>
       <div class="card">
         <div class="col-xs-6 col-sm-5 col-md-4">
-          <% if boat.photo? %>
-            <%= cl_image_tag boat.photo.path, width: 200, height: 300, crop: :fit %>
+          <% if boat.photos? %>
+            <%= cl_image_tag boat.photos[0].path, width: 200, height: 300, crop: :fit %>
           <% end %>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-5">
@@ -12,7 +12,7 @@
             <h3><%= boat.name %></h3>
             <span><%= boat.city %></span>
             <div>
-              <i><%= boat.type %></i>
+              <i><%= boat.boat_type %></i>
               <i><%= boat.capacity %></i>
             </div>
           <% end %>
