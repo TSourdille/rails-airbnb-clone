@@ -15,5 +15,4 @@ class Boat < ApplicationRecord
   has_attachments :photos, maximum: 5
 
   validates :boat_type, :name, :city, :capacity, :day_rate, :user_id, presence: true
-  validates :boat_type, inclusion: { in: BOAT_TYPES }
 end
