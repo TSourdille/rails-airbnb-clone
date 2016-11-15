@@ -16,9 +16,22 @@
     </div>
   </div>
 </div>
+
+<!-- All bookings -->
+
 <div class="">
+  <%= @bookings&.each do |booking| %>
+    <%= booking.start_at %>
+    <%= booking.end_at %>
+  <% end %>
+</div>
+
+<!-- New Booking form -->
+<div class="">
+  <h1>New Booking</h1>
   <%= simple_form_for [@boat, @booking] do |f| %>
-    <%= f.input :my_date, as: :date_time_picker %>
+    <%= f.input :start_at, :as => :date %>
+    <%= f.input :end_at, :as => :date %>
     <%= f.button :submit %>
   <% end %>
 </div>
