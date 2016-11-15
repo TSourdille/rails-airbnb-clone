@@ -1,8 +1,19 @@
 class BoatsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
+  def index
+    @boats = Boat.all
+  end
+
+  def show
+    @boat = Boat.find(params[:id])
+  end
+
   def new
     @user = current_user
     @boat = @user.boats.new
   end
+  
   def create
     user = current_user
     boat = user.boats.new(boat_params)
