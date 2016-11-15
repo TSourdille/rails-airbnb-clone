@@ -10,6 +10,14 @@
   justify-content: space-between;
 }
 
+#title {
+  margin-right: 50%;
+  color: #024A82;
+}
+
+#title:hover {
+  text-decoration:none;
+  }
 /* Optional class to fix the navbar on top */
 .navbar-wagon-fixed {
   position: fixed;
@@ -52,17 +60,16 @@
 .navbar-wagon-button {
   margin-left: 10px;
   padding: 0 20px;
-  border-radius: 20em;
+  border-radius: 15px;
   line-height: 40px;
-  background-color: #D23333;
+  background-color: #024A82;
   color: white;
   font-size: 14px;
-  border: 2px solid #D23333;
 }
 .navbar-wagon-button:hover {
-  color: white;
-  background: #D23333;
-  border-color: #ac2626;
+  color: #024A82;
+  background: white;
+  border-color: #024A82;
 }
 
 /* Navbar search form */
