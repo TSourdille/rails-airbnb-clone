@@ -14,12 +14,12 @@ end
 def seed_users
   5.times do
     User.new(
-    email: Faker::Internet.email,
-    password: 'theorules',
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    phone_number: Faker::PhoneNumber.cell_phone,
-    boat_license: [true, false].sample
+      email: Faker::Internet.email,
+      password: 'theorules',
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      phone_number: Faker::PhoneNumber.cell_phone,
+      boat_license: [true, false].sample
     )
   end
 end
@@ -27,7 +27,6 @@ end
 def seed_boats
   Availability.destroy_all
   Booking.destroy_all
-  Boat.destroy_all
   puts "Seeding 20 boats from anywhere in France"
 
   boats = JSON.parse(File.read("db/samboat_2016-11-15-15-39.json"))

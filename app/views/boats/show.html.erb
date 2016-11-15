@@ -16,3 +16,9 @@
     </div>
   </div>
 </div>
+<div class="">
+  <%= simple_form_for [@boat, @booking] do |f| %>
+    <%= f.input :my_date, as: :date_time_picker %>
+    <%= f.button :submit %>
+  <% end %>
+</div>

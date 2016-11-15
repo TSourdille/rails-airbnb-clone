@@ -13,6 +13,7 @@
 @import "components/index";
 @import "pages/index";
 @import "vendor/index";
+*= require bootstrap-datetimepicker
 
 .site {
   display: flex;
