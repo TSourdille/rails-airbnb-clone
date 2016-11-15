@@ -8,6 +8,8 @@ gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'redis'
 gem 'devise'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -20,8 +22,6 @@ gem "cloudinary", "1.1.0"
 gem "attachinary", github: "assembler/attachinary"
 gem "jquery-fileupload-rails"
 gem "coffee-rails"
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
 
 group :development, :test do
   gem 'binding_of_caller'
