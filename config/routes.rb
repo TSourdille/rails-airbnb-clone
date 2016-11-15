@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get 'boats/new'
-
-  devise_for :users
+  mount Attachinary::Engine => "/attachinary"
   root to: 'pages#home'
+  devise_for :users
   resources :boats, only: [:new, :create]
 end

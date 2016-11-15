@@ -25,7 +25,8 @@ class BoatsController < ApplicationController
     :description,
     :specs,
     :equipment,
-    :day_rate
+    :day_rate,
+    photos: []
     )
   end
 end
