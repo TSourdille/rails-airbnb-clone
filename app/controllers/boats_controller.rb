@@ -7,8 +7,8 @@ class BoatsController < ApplicationController
     user = current_user
     boat = user.boats.new(boat_params)
     if boat.save
+      flash[:notice] = "Your boat has been added to our listing!"
       redirect_to root_path # TODO: boat
-      # TODO: flash success
     else
       render 'new'
     end
