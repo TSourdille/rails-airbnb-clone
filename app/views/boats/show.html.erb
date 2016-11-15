@@ -23,9 +23,11 @@
   <h3>Existant bookings</h3>
   <% if @bookings.any? %>
     <% @bookings.each do |booking| %>
-      <h5>Booking <%= booking.id %></h5>
-      <div><%= booking.start_at %></div>
-      <div><%= booking.end_at %></div>
+      <hr>
+      <h4>Booking <%= booking.id %></h4>
+      <span class="start-date badge-blue"><%= booking.start_at %></span>
+      -
+      <span class="end-date badge-blue"><%= booking.end_at %></span>
       <div><%= booking.user_review %></div>
       <div><%= booking.user_rating %></div>
       <%= simple_form_for [@boat, booking] do |f| %>
