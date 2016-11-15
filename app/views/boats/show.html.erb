@@ -1,0 +1,20 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div>
+        <h1><%= @boat.name %></h1>
+      </div>
+      <div>
+        <% if @boat.photo? %>
+          <%= cl_image_tag @boat.photo.path, width: 200, height: 300, crop: :fill %>
+        <% end %>
+        <%= link_to "Index", boats_path, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

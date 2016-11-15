@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <% @boats.each do |boat| %>
+      <div class="card">
+        <div class="col-xs-6 col-sm-5 col-md-4">
+          <% if boat.photo? %>
+            <%= cl_image_tag boat.photo.path, width: 200, height: 300, crop: :fit %>
+          <% end %>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-5">
+          <%= link_to boat_path(boat) do %>
+            <h3><%= boat.name %></h3>
+            <span><%= boat.city %></span>
+            <div>
+              <i><%= boat.type %></i>
+              <i><%= boat.capacity %></i>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
