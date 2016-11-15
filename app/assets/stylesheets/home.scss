@@ -7,7 +7,7 @@
   width: 100%;
   padding-right: 0px;
   padding-left: 0px;
-
+  overflow: auto;
 }
 
 .banner-container {
@@ -16,7 +16,6 @@
   background-size: cover;
   width: 100%;
   height: 60vh;
-  background-color: red;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -40,4 +39,42 @@
   color: #D23333;
   max-width: 20%;
   text-align: center;
+}
+
+.map-container {
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 600px;
+
+}
+
+.city-box {
+  background-color: #DAE3EA;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Bariol;
+  font-size: 24px;
+  line-height: 50px;
+  margin-right: 4%;
+}
+
+
+.map-box {
+  padding: 2%;
+  width: 40%;
+  height: 90%;
+
+}
+
+.sample-boats-container {
+  background-color: rgba(2,74,130, 0.8);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 600px;
 }
