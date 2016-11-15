@@ -21,18 +21,23 @@
 
 <div class="">
   <h3>Existant bookings</h3>
-  <% @bookings.each do |booking| %>
-    <h5>Booking <%= booking.id %></h5>
-    <div><%= booking.start_at %></div>
-    <div><%= booking.end_at %></div>
-    <div><%= booking.user_review %></div>
-    <div><%= booking.user_rating %></div>
-    <%= simple_form_for [@boat, booking] do |f| %>
-      <%= f.input :user_review %>
-      <%= f.input :user_rating %>
-      <%= f.button :submit %>
+  <% if @bookings.any? %>
+    <% @bookings.each do |booking| %>
+      <h5>Booking <%= booking.id %></h5>
+      <div><%= booking.start_at %></div>
+      <div><%= booking.end_at %></div>
+      <div><%= booking.user_review %></div>
+      <div><%= booking.user_rating %></div>
+      <%= simple_form_for [@boat, booking] do |f| %>
+        <%= f.input :user_review %>
+        <%= f.input :user_rating %>
+        <%= f.button :submit %>
+      <% end %>
     <% end %>
+  <% else %>
+    <p>No bookings yet</p>
   <% end %>
+
 </div>
 
 <!-- New Booking form -->

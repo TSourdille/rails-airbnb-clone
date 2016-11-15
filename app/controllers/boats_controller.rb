@@ -9,7 +9,7 @@ class BoatsController < ApplicationController
     @boat = Boat.find(params[:id])
     @user = current_user
     @bookings = @boat.bookings
-    @booking = @boat.bookings.new
+    @booking = Booking.new
   end
 
   def new
