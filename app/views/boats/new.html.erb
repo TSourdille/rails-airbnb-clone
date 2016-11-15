@@ -1,2 +1,13 @@
-<h1>Boats#new</h1>
-<p>Find me in app/views/boats/new.html.erb</p>
+<h1>List your boat</h1>
+
+<%= simple_form_for [@user, @boat] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :boat_type %>
+  <%= f.input :city %>
+  <%= f.input :capacity %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :specs, as: :text %>
+  <%= f.input :equipment, as: :text %>
+  <%= f.input :day_rate %>
+  <%= f.button :submit %>
+<% end %>
