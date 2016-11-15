@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20161115104352) do
   end
 
   create_table "boats", force: :cascade do |t|
-    t.string   "type"
+    t.string   "boat_type"
     t.string   "name"
     t.string   "city"
     t.string   "capacity"

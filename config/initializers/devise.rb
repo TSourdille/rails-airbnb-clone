@@ -279,4 +279,5 @@ Devise.setup do |config|
     image_size: 'square',  # 50x50, guaranteed ratio
     secure_image_url: true
 
+
 end
