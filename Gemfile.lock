@@ -6,15 +6,6 @@ GIT
       cloudinary (~> 1.1.0)
       rails (>= 3.2)
 
-GIT
-  remote: git://github.com/zpaulovics/datetimepicker-rails.git
-  revision: 36d21cec5da7f5b214925804f60e63c61c747023
-  branch: master
-  submodules: true
-  specs:
-    datetimepicker-rails (4.7.16)
-      momentjs-rails (>= 2.9.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -135,8 +126,6 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
-    momentjs-rails (2.15.1)
-      railties (>= 3.1)
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -264,7 +253,6 @@ DEPENDENCIES
   bootstrap-sass
   cloudinary (= 1.1.0)
   coffee-rails
-  datetimepicker-rails!
   devise
   faker
   figaro
