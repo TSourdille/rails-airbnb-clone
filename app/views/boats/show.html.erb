@@ -1,53 +1,23 @@
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <div>
-        <h1><%= @boat.name %></h1>
-      </div>
-      <div>
-        <% if @boat.photos? %>
-          <% @boat.photos.each do |photo| %>
-            <%= cl_image_tag photo.path, width: 200, height: 300, crop: :fill %>
-          <% end %>
-        <% end %>
-        <%= link_to "Index", boats_path, class: "btn btn-danger" %>
-      </div>
+<div class="media">
+  <div class="media-body">
+    <div class="media-section">
+      <%= render 'boat_title' %>
+      <%= render 'boat_photos' %>
+      <%= render 'boat_info' %>
+    </div>
+  </div>
+
+  <div class="media-aside">
+    <div class="media-section">
+      <%= render 'boat_booking' %>
+    </div>
+    <div class="media-section">
+      <h2>MAP</h2>
     </div>
   </div>
 </div>
 
+<%= render 'boat_description' %>
+
 <!-- All bookings -->
-
-<div class="">
-  <h3>Existant bookings</h3>
-  <% if @bookings.any? %>
-    <% @bookings.each do |booking| %>
-      <hr>
-      <h4>Booking <%= booking.id %></h4>
-      <span class="start-date badge-blue"><%= booking.start_at %></span>
-      -
-      <span class="end-date badge-blue"><%= booking.end_at %></span>
-      <div><%= booking.user_review %></div>
-      <div><%= booking.user_rating %></div>
-      <%= simple_form_for [@boat, booking] do |f| %>
-        <%= f.input :user_review %>
-        <%= f.input :user_rating %>
-        <%= f.button :submit %>
-      <% end %>
-    <% end %>
-  <% else %>
-    <p>No bookings yet</p>
-  <% end %>
-
-</div>
-
-<!-- New Booking form -->
-<div class="">
-  <h1>New Booking</h1>
-  <%= simple_form_for [@boat, @booking] do |f| %>
-    <%= f.input :start_at, :as => :date %>
-    <%= f.input :end_at, :as => :date %>
-    <%= f.button :submit %>
-  <% end %>
-</div>

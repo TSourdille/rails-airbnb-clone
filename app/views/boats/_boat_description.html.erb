@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>Description</h2>
+  <div class="description">
+    <%= @boat.description %>
+  </div>
+
+  <h2>Boat specs</h2>
+  <div class="specs">
+    <% @boat.specs.split("\n").each do |spec| %>
+      <div class="col-xs-6">
+        <%# TODO: split(": ") and use flexbox to layout %>
+        <%# TODO: substitute _ and - %>
+        <%= spec %>
+      </div>
+    <% end %>
+  </div>
+
+  <h2>Boat equipment</h2>
+  <div class="equipment">
+    <% @boat.equipment.split("\n").each do |equip| %>
+      <div class="col-xs-4">
+        <%# TODO: substitute _ and - %>
+        <%= equip.gsub("?", "") %>
+      </div>
+    <% end %>
+  </div>
+
+  <h2>Reviews</h2>
+  <div class="reviews"><%#= @boat.reviews %></div>
+</div>
