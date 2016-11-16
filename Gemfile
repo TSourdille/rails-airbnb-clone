@@ -22,6 +22,7 @@ gem "cloudinary", "1.1.0"
 gem "attachinary", github: "assembler/attachinary"
 gem "jquery-fileupload-rails"
 gem "coffee-rails"
+gem 'colorize'
 
 group :development, :test do
   gem 'binding_of_caller'
@@ -29,7 +30,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
 
-  gem 'colorize'
   gem 'faker'
   gem 'spring'
   gem 'listen', '~> 3.0.5'
