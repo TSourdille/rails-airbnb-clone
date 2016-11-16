@@ -10,5 +10,23 @@
   margin: 0;
 }
 .boat-content {
-  
+}
+.boat-specs {
+}
+.boat-description-all {
+  display: flex;
+  flex-direction: column;
+}
+.boat-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.boat-name {
+  font-size: 32px;
+}
+.boat-city {
+  font-size: 24px;
+  margin-left: 10px;
 }

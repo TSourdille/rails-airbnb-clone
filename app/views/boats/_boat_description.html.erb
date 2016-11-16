@@ -1,30 +1,30 @@
 <div class="container">
-  <h2>Description</h2>
-  <div class="description">
-    <%= @boat.description %>
-  </div>
+  <div class="boat-description-all">
+    <h2>Description</h2>
+    <div class="boat-description">
+      <%= @boat.description %>
+    </div>
 
-  <h2>Boat specs</h2>
-  <div class="specs">
-    <% @boat.specs.split("\n").each do |spec| %>
+    <h2>Boat specs</h2>
+    <div class="boat-specs">
+      <% @boat.specs.split("\n").each do |sp| %>
       <div class="col-xs-6">
-        <%# TODO: split(": ") and use flexbox to layout %>
-        <%# TODO: substitute _ and - %>
-        <%= spec %>
+        <%= sp %>
       </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 
-  <h2>Boat equipment</h2>
-  <div class="equipment">
-    <% @boat.equipment.split("\n").each do |equip| %>
+    <h2>Boat equipment</h2>
+    <div class="boat-equipment">
+      <% @boat.equipment.split("\n").each do |equip| %>
       <div class="col-xs-4">
         <%# TODO: substitute _ and - %>
         <%= equip.gsub("?", "") %>
       </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 
-  <h2>Reviews</h2>
-  <div class="reviews"><%#= @boat.reviews %></div>
+    <h2>Reviews</h2>
+    <div class="boat-reviews"><%#= @boat.reviews %></div>
+  </div>
 </div>

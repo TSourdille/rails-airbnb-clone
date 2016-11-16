@@ -2,9 +2,11 @@
 <div class="media">
   <div class="media-body">
     <div class="media-section">
-      <%= render 'boat_title' %>
-      <%= render 'boat_photos' %>
-      <%= render 'boat_info' %>
+      <div class="container">
+        <%= render 'boat_title' %>
+        <%= render 'boat_photos' %>
+        <%= render 'boat_info' %>
+      </div>
     </div>
   </div>
 
@@ -18,6 +20,7 @@
   </div>
 </div>
 
+<%= render 'boat_owner' %>
 <%= render 'boat_description' %>
 
 <!-- All bookings -->
