@@ -73,6 +73,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    colorize (0.8.1)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -253,6 +254,7 @@ DEPENDENCIES
   bootstrap-sass
   cloudinary (= 1.1.0)
   coffee-rails
+  colorize
   devise
   faker
   figaro

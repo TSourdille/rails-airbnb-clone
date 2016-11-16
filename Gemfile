@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
 
+  gem 'colorize'
   gem 'faker'
   gem 'spring'
   gem 'listen', '~> 3.0.5'
