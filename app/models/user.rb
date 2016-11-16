@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :boats
   has_many :bookings
   has_many :booked_boats, through: :boats, source: :bookings
+  has_attachment :photo
   validates :first_name, :last_name, presence: true
 
   def self.find_for_facebook_oauth(auth)
