@@ -28,7 +28,8 @@
         <% @user.boats.each do |b| %>
           <hr>
           <div class="boat-picture">
-            <p> <strong> <%= b.name %> </strong> </p>
+            <p> <strong id="boat-name"> <%= b.name.upcase %> </strong> </p>
+            <br>
             <% if b.image1 || b.image2 || b.image3 %>
               <%= image_tag(b.image1, { size: '220x200', r: 'max'}) %>
               <br>
@@ -42,8 +43,8 @@
           <div class="flex-summary">
           <br>
           <hr>
-            <p> <strong> <%= b.boat_type %> </strong> </p>
-            <p> <strong> Capacité : </strong>  <%= b.capacity %> </p>
+            <p> <strong> . <%= b.boat_type %> </strong> </p>
+            <p> <strong> . Capacité : </strong>  <%= b.capacity %> </p>
             <hr>
               <div class="boat-summary-box">
               <em> <p> <strong> Détails : </strong></p> <%= b.description[0..800].capitalize %>... </em>
