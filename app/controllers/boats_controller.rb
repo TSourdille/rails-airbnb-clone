@@ -3,6 +3,12 @@ class BoatsController < ApplicationController
 
   def index
     @boats = Boat.all
+
+    @boat_location = Boat.where.not(latitude: nil, longitude: nil)
+    @hash = Gmaps4rails.build_markers(@boat_location) do |boat, marker|
+      marker.lat boat.latitude
+      marker.lng boat.longitude
+    end
   end
 
   def show
@@ -10,6 +16,13 @@ class BoatsController < ApplicationController
     @user = current_user
     @bookings = @boat.bookings
     @booking = Booking.new
+
+    if @boat.longitude && @boat.latitude
+      @hash = Gmaps4rails.build_markers(@boat) do |boat, marker|
+        marker.lat boat.latitude
+        marker.lng boat.longitude
+      end
+    end
   end
 
   def new
