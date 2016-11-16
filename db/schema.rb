@@ -51,16 +51,13 @@ ActiveRecord::Schema.define(version: 20161116142404) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-<<<<<<< HEAD
     t.float    "latitude"
     t.float    "longitude"
-=======
     t.string   "length"
     t.string   "beds"
     t.string   "image1"
     t.string   "image2"
     t.string   "image3"
->>>>>>> master
     t.index ["user_id"], name: "index_boats_on_user_id", using: :btree
   end
 
