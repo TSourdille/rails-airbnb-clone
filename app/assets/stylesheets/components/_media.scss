@@ -6,7 +6,13 @@
   padding: 20px;
 }
 .media-body img {
-  width: 100%;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
 }
 .media-aside {
   flex: 0 0 400px;
