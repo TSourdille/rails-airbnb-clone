@@ -6,8 +6,8 @@ require "pry-byebug"
 
 class SamboatScraper
   attr_reader :boats
-  def initialize(boats)
-    @boats = boats || []
+  def initialize
+    @boats = {}
   end
 
   def scrape_boats
@@ -34,149 +34,44 @@ class SamboatScraper
     end
   end
 
-  def scrape_boat(noko_boat, boat, index, errors)
-    boat[:original_id] = boat["original_id"]
-    boat.delete("original_id")
-    boat[:url] = boat["url"]
-    boat.delete("url")
-    begin
-      boat[:name] = noko_boat.css('.block-100 h1').text
-      display_success(:name)
-    rescue
-      errors[:name] += 1
-      display_error(:name)
-    end
+  def scrape_boat(noko_boat, boat_url, stats)
+    boat = {}
+    boat[:url] = boat_url
+    boat[:name] = noko_boat.css('.block-100 h1').text
     parse_city_type_capacity(noko_boat, boat)
-    begin
-      boat[:images] = parse_images(noko_boat)
-      display_success(:images)
-    rescue
-      errors[:images] += 1
-      display_error(:images)
-    end
-    begin
-      boat[:description] = noko_boat.css('#desc p').text.strip
-      display_success(:description)
-    rescue
-      errors[:description] += 1
-      display_error(:description)
-    end
-    begin
-      boat[:day_rate] = noko_boat.css('.table-responsive tbody tr:first td:first').text
-      display_success(:day_rate)
-    rescue
-      errors[:day_rate] += 1
-      display_error(:day_rate)
-    end
-    begin
-      boat[:specs] = parse_specs(noko_boat)
-      display_success(:specs)
-    rescue
-      errors[:specs] += 1
-      display_error(:specs)
-    end
-    begin
-      boat[:equipment] = parse_equipment(noko_boat)
-      display_success(:equipment)
-    rescue
-      errors[:equipment] += 1
-      display_error(:equipment)
-    end
-    begin
-      boat[:reviews] = parse_reviews(noko_boat)
-      display_success(:reviews)
-    rescue
-      errors[:reviews] += 1
-      display_error(:reviews)
-    end
-    display_headers(errors) if index % 20 == 0
-    display_parsing_full(boat, errors)
+    boat[:images] = parse_images(noko_boat)
+    boat[:description] = noko_boat.css('#desc p').text
+    boat[:day_rate] = noko_boat.css('.table-responsive table:first tbody tr:first td:first').text
+    boat[:specs] = parse_specs(noko_boat)
+    boat[:equipment] = parse_equipment(noko_boat)
+    boat[:reviews] = parse_reviews(noko_boat)
+    clean_up(boat)
+    @boats[stats[:index]] = boat
+    display_boat_name(boat, stats)
   end
 
-  def store_json
-    filepath = Time.now.strftime('db/samboat_%Y-%m-%d-%H-%M')
+  def store_json(array, stats)
+    filepath = "db/samboat_#{stats[:start]}to#{stats[:end]}_#{array}" + Time.now.strftime('_%Y%m%d%H%M')
     File.open(filepath + '.json', 'w') do |file|
-      file.write(JSON.generate(@boats.first(10)))
+      file.write(JSON.generate(@boats))
     end
   end
 
   private
 
-  def display_error(key)
-    # puts "Parsing error for #{key}".light_red
+  def display_boat_name(boat, stats)
+    s = "#{stats[:index]} - #{stats[:start]+stats[:index]}/#{stats[:end]} - #{boat[:name]}".gsub(/\n|\r/, "")
+    print s + "                                    \r"
   end
-  def display_success(key)
-    # puts "Parsing success for #{key}".light_green
-  end
-  def display_headers(hash)
-    print "|".green
+
+  def clean_up(hash)
     hash.each do |k, v|
-      print " #{k} |"
-    end
-    puts ""
-  end
-  def display_parsing_summary(boat)
-    puts "#{boat[:city].light_cyan} - #{boat[:original_id].magenta} - #{boat[:name].light_blue} - Parsing complete"
-  end
-  def display_parsing_full(hash, errors)
-    hash.each do |key, value|
-      print "|"
-      case key
-      when :original_id
-        print ""
-        value.nil? ? print(('%-12.12s' % value).green) : print(('%-12.12s' % value).green)
-        print " "
-      when :url
-        print "  "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "  "
-      when :name
-        print "  "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "   "
-      when :city
-        print "  "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "   "
-      when :type
-        print "  "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "   "
-      when :capacity
-        print "    "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "     "
-      when :images
-        print "   "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "    "
-      when :description
-        print "      "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "      "
-      when :day_rate
-        print "     "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "    "
-      when :specs
-        print "   "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "   "
-      when :equipment
-        print "     "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "     "
-      when :reviews
-        print "    "
-        value.nil? ? print("E".light_red) : print("S".green)
-        print "    "
+      clean_up(v) if v.is_a?(Hash)
+      begin
+        hash[k] = v.strip
+      rescue
       end
     end
-    print "|"
-    print "  "
-    print ('%-6.6s' % (Time.now - errors[:time_elapsed]).round(1))
-    print "   "
-    puts "|"
   end
 
   def parse_city_type_capacity(noko_boat, boat)
@@ -186,15 +81,16 @@ class SamboatScraper
         when 0
           boat[:city] = b.text
         when 1
-          boat[:type] = b.text
+          text = b.text.split(", ")
+          boat[:type] = text[0]
+          boat[:length] = text[1]
         when 2
-          boat[:capacity] = b.text
+          text = b.text.split(", ")
+          boat[:capacity] = text[0]
+          boat[:beds] = text[1]
         end
       end
-      display_success(:city)
     rescue
-      errors[:city_type_capacity] += 1
-      display_error(:city_type_capacity)
     end
   end
   def parse_images(noko_boat)
@@ -203,10 +99,7 @@ class SamboatScraper
       noko_boat.css('.container-slider > div:nth-child(1) > div:not(:first)').each do |image|
         images << image.css('img:first').attribute('src').text
       end
-      display_success(:images)
     rescue
-      errors[:images] += 1
-      display_error(:images)
     end
     images
   end
@@ -221,10 +114,7 @@ class SamboatScraper
           specs[header.to_sym] = data
         end
       end
-      display_success(:specs)
     rescue
-      errors[:specs] += 1
-      display_error(:specs)
     end
     specs
   end
@@ -234,17 +124,14 @@ class SamboatScraper
       noko_boat.css('#avis .row').each do |rev|
         review = {}
         rating = 5
-        review[:description] = rev.css('.p-membre-avis:last-child').text.strip
+        review[:description] = rev.css('.p-membre-avis:last-child').text
         rev.css('.block-100 i').each do |star|
           rating -= 1 if star.attribute('class').value.include?('fa fa-star-o')
         end
         review[:rating] = rating
         reviews << review
       end
-      display_success(:reviews)
     rescue
-      errors[:reviews] += 1
-      display_error(:reviews)
     end
     reviews
   end
@@ -256,36 +143,75 @@ class SamboatScraper
         boolean = equipment.attribute('class').value.include?('unavailable')
         equipments[(header + "?").gsub(" ", "_").to_sym] = !boolean
       end
-      display_success(:equipment)
     rescue
-      errors[:equipment] += 1
-      display_error(:equipment)
     end
     equipments
   end
 end
 
-boats = JSON.parse(File.read("db/samboat_urls_all_boats.json"))
-errors = { original_id: 0, url: 0, name: 0, city: 0, type: 0, capacity: 0, images: 0, description: 0, day_rate: 0, specs: 0, equipment: 0, reviews: 0, time_elapsed: Time.now }
 
-sam = SamboatScraper.new(boats)
-# sam.scrape_boats
-# sam.store_json
-
-puts "How many boats?"
-count = gets.chomp.to_i
-
-boats = sam.boats.first(count)
-boats.each_with_index do |boat, index|
-  noko_boat = Nokogiri::HTML(open(boat["url"]))
-  sam.scrape_boat(noko_boat, boat, index, errors)
+def cool_boats
+  [
+    "https://www.samboat.fr/location-bateau/cannes/bateau-a-moteur/1309",
+    "https://www.samboat.fr/location-bateau/empuriabrava/semi-rigide/8787",
+    "https://www.samboat.fr/location-bateau/santa-maria-poggio/bateau-a-moteur/14734",
+    "https://www.samboat.fr/location-bateau/cap-dagde-le/bateau-a-moteur/9785",
+    "https://www.samboat.fr/location-bateau/le-marin-martinique/multicoque/2941",
+    "https://www.samboat.fr/location-bateau/le-marin-martinique/multicoque/2946",
+    "https://www.samboat.fr/location-bateau/nice/multicoque/1089",
+    "https://www.samboat.fr/location-bateau/ajaccio/voilier/2427",
+    "https://www.samboat.fr/location-bateau/ajaccio/bateau-a-moteur/2494",
+    "https://www.samboat.fr/location-bateau/saint-tropez/bateau-a-moteur/1685",
+    "https://www.samboat.fr/location-bateau/cogolin/semi-rigide/14997",
+    "https://www.samboat.fr/location-bateau/arzon/voilier/10211",
+    "https://www.samboat.fr/location-bateau/porto-vecchio/bateau-a-moteur/9445",
+    "https://www.samboat.fr/location-bateau/treauville/multicoque/2927",
+    "https://www.samboat.fr/location-bateau/ajaccio/voilier/2430",
+    "https://www.samboat.fr/location-bateau/horta/voilier/8652",
+    "https://www.samboat.fr/location-bateau/ajaccio/semi-rigide/3083",
+    "https://www.samboat.fr/location-bateau/saint-florent/semi-rigide/2098",
+    "https://www.samboat.fr/location-bateau/vermenton/peniche/10771"
+  ]
+end
+def all_boats
+  JSON.parse(File.read("db/samboat_urls_all_boats.json")).map { |b| b["url"] }
 end
 
-# sam.boats.each_with_index do |boat, index|
-#   noko_boat = Nokogiri::HTML(open(boat["url"]))
-#   sam.scrape_boat(noko_boat, boat, index, errors)
-# end
+CHOICES = [{cool_boats: cool_boats}, {all_boats: all_boats}]
+answer = -1
+while answer < 0 || answer > CHOICES.length
+  puts "Which boats would you like to parse?"
+  CHOICES.each_with_index { |e, i| puts "#{i} - #{e.keys.first}" }
+  answer = gets.chomp.to_i
+end
 
-sam.store_json
+case answer
+when 0 then
+  boats = CHOICES[answer].values.first
+when 1 then
+  boats = CHOICES[answer].values.first
+end
 
-puts "Done".green
+r_start = -1
+r_end = -1
+while r_start < 0 || r_start > r_end || r_end > boats.size
+  puts "What range do you want to parse? (0 - #{boats.size - 1})"
+  print "start> "
+  r_start = gets.chomp.to_i
+  print "end> "
+  r_end = gets.chomp.to_i
+end
+r_count = r_end - r_start
+boats = boats[r_start..r_end]
+
+sam = SamboatScraper.new
+
+boats.each_with_index do |boat_url, index|
+  stats = {start: r_start, end: r_end, count: r_count, index: index}
+  noko_boat = Nokogiri::HTML(open(boat_url))
+  sam.scrape_boat(noko_boat, boat_url, stats)
+end
+
+sam.store_json(CHOICES[answer].keys.first, {start: r_start, end: r_end})
+
+puts "\n\nDone".green
