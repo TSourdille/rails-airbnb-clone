@@ -2,9 +2,9 @@
   <div class="media-body">
     <div class="user-header">
       <% if @user.facebook_picture_url %>
-        <%= cl_image_tag(@user.facebook_picture_url, { size: '55x50', r: 'max'} ) %>
+        <%= cl_image_tag(@user.facebook_picture_url, { size: '65x60', r: 'max'} ) %>
       <% else %>
-        <%= "No pictures for this boat" %>
+        <%= image_tag("blank-profile-picture.svg") %>
       <% end %>
       <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
     </div>
@@ -14,7 +14,6 @@
     <p> <%= @user.phone_number %> </p>
 
     <div class="media-section">
-      <h2>Pictures</h2>
       <% @user.boats.each do |b| %>
         <% if b.photos %>
           <%= cl_image_tag(b.photos&.first&.path) %>
@@ -27,21 +26,19 @@
       ...
     </div>
     <div class="media-section">
-      <h2>Boat(s)</h2>
+      <h2> <%= @user.first_name %>'s Boat(s)</h2>
 
       <br>
-        <hr>
+
       <% @user.boats.each do |b| %>
+        <hr>
         <p> <strong> <%= b.name %> </strong> </p>
         <p> <em> <%= b.boat_type %> </em> </p>
+        <%= link_to "Check this boat", b %>
         <hr>
-        <%= b.capacity %>
+        <p> <strong> Capacité : </strong>  <%= b.capacity %> </p>
         <br>
         <%= b.description %>
-        <br>
-        <%= b.specs %>
-        <br>
-        <%= b.equipment %>
         <br>
         <%= b.day_rate %>
         <br>
