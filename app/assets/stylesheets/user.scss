@@ -1,0 +1,14 @@
+.flex-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+  background-color: rgba(2,74,130, 0.1);
+}
+
+.boat-summary-box {
+  line-height: 30px;
+  width: 70%;
+}
+
