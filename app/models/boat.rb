@@ -9,10 +9,14 @@ class Boat < ApplicationRecord
   ]
   CITIES = []
 
+
   belongs_to :user
   has_many :bookings
   has_many :availabilities
   has_attachments :photos, maximum: 5
 
   validates :boat_type, :name, :city, :capacity, :day_rate, :user_id, presence: true
+
+  geocoded_by :city
+  after_validation :geocode, if: :city_changed?
 end
