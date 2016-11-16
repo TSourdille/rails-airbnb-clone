@@ -1,0 +1,55 @@
+<div class="media">
+  <div class="media-body">
+    <div class="user-header">
+      <% if @user.facebook_picture_url %>
+        <%= cl_image_tag(@user.facebook_picture_url, { size: '65x60', r: 'max'} ) %>
+      <% else %>
+        <%= image_tag("blank-profile-picture.svg", {size: '65x60', r: 'max'}) %>
+      <% end %>
+      <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
+    </div>
+    <br>
+
+    <h4>Phone number : <h4>
+    <p> <%= @user.phone_number %> </p>
+
+    <div class="media-section">
+      <% @user.boats.each do |b| %>
+        <% if b.photos %>
+          <%= cl_image_tag(b.photos&.first&.path) %>
+        <% else %>
+          <%= "No pictures for this boat" %>
+        <% end %>
+      <% end %>
+
+    </div>
+    <div class="media-section">
+      <%unless @user.boats.empty?  %>
+        <h2> <%= @user.first_name %>'s Boat(s)</h2>
+
+        <br>
+        <% @user.boats.each do |b| %>
+          <hr>
+          <p> <strong> <%= b.name %> </strong> </p>
+          <p> <em> <%= b.boat_type %> </em> </p>
+          <%= link_to "Check this boat", b %>
+          <hr>
+          <p> <strong> Capacité : </strong>  <%= b.capacity %> </p>
+          <br>
+          <%= b.description %>
+          <br>
+          <%= b.day_rate %>
+          <br>
+        <% end %>
+      <%end %>
+    </div>
+  </div>
+  <div class="media-aside">
+    <div class="media-section">
+      <h2>Share</h2>
+    </div>
+    <div class="media-section">
+      <h2>382 upvotes</h2>
+    </div>
+  </div>
+</div>
