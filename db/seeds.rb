@@ -16,8 +16,27 @@ def delete(boolean_array)
   if boolean_array.include?(true)
     MODELS.reverse.each_with_index do |m, i|
       if boolean_array[i]
-        typeset("#{m.count} #{m.name}s deleted.\n".light_red)
-        m.destroy_all
+        if m.name == "User"
+          fake_users = User.all.reject { |u| u.photo? || u.facebook_picture_url }
+          custom_users = User.all.select { |u| u.photo? || u.facebook_picture_url }
+          database = "\n#{custom_users.count} custom users in database - ".light_yellow
+          action = "DELETE ALL".light_red
+          prompt = " ? [y/n] "
+          puts database + action + prompt
+          answer = (STDIN.gets.chomp == "y")
+          if answer
+            typeset("#{m.count} #{m.name}s deleted.\n".light_red)
+            m.destroy_all
+          else
+            typeset("#{fake_users.count} #{m.name}s deleted.\n".light_red)
+            fake_users.each do |u|
+              u.destroy
+            end
+          end
+        else
+          typeset("#{m.count} #{m.name}s deleted.\n".light_red)
+          m.destroy_all
+        end
       end
     end
   else
@@ -80,7 +99,7 @@ end
 
 def seed_boats(json_filepath)
   number = -1
-  while number < 0 || number > User.count
+  while number < 1 || number > User.count
     typeset("\nYou have #{User.count} users\n".light_yellow)
     typeset("How many of them would you like to attribute boats to?\n".light_cyan)
     print "> "
@@ -173,7 +192,7 @@ def inform_not_available
 end
 
 def typeset(string)
-  string.each_char { |chr| print chr ; sleep(0.027) }
+  string.each_char { |chr| print chr ; sleep(0.026) }
 end
 
 def typeset_title(string, color)
@@ -189,7 +208,7 @@ def get_feedback
   if answer == "y"
     puts ""
     typeset("Thank you for using JooLeeAnh's Express Seeding services !\n\n".light_yellow)
-    sleep(2)
+    sleep(1)
   else
     sleep(1)
     typeset("\nFuck you\n\n".red)
