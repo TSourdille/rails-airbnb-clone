@@ -1,11 +1,14 @@
 <div class="container">
-  <div class="row">
-    <% @boats.each do |boat| %>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <%= link_to boat_path(boat) do %>
-            <%= render 'shared/boat_card', boat: boat %>
-          <% end %>
-        </div>
-    <% end %>
+  <div class="boat-list">
+    <h2 class="boat-header">Results</h2>
+    <div class="row">
+      <% @boats.each do |boat| %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <%= link_to boat_path(boat) do %>
+        <%= render 'shared/boat_card', boat: boat %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
   </div>
 </div>
