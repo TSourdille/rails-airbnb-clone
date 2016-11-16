@@ -46,11 +46,11 @@
           <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to "#" do %>
-              <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
             </li>
             <li>
+              <%= link_to current_user do %>
+              <i class="fa fa-user"></i> <%= t("Profile") %>
+              <% end %>
               <%= link_to "#" do %>
               <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
               <% end %>
@@ -73,7 +73,7 @@
       <% end %>
 
       <!-- Button (call-to-action) -->
-      <%= link_to t(".top_call_to_action", default: "List your boat"), new_boat_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= link_to t(".top_call_to_action", default: "Ajoutez un bateau"), new_boat_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
     </div>
 
 

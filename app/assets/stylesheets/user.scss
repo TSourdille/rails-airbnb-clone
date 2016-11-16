@@ -1,0 +1,25 @@
+.user-header-container {
+  background-color: rgba(2,74,130, 0.1);
+}
+
+.flex-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+  background-color: rgba(2,74,130, 0.1);
+}
+
+.boat-summary-box {
+  line-height: 30px;
+  width: 70%;
+}
+
+.media-section img {
+  border-radius: 50%;
+}
+
+#boat-name {
+  text-decoration: underline;
+}
