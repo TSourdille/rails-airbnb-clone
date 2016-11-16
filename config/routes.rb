@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
-
-  get 'users/new'
-
-  get 'users/create'
 
   mount Attachinary::Engine => "/attachinary"
   devise_for :users,
