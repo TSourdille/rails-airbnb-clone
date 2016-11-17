@@ -197,7 +197,7 @@ def france_boats_url
     "https://www.samboat.fr/location-bateau/region/languedoc-roussillon?",
     "https://www.samboat.fr/location-bateau/region/midi-pyrenees?",
     "https://www.samboat.fr/location-bateau/region/aquitaine?",
-    "https://www.samboat.fr/location-bateau/region/cors?e"
+    "https://www.samboat.fr/location-bateau/region/corse?"
   ]
 end
 
