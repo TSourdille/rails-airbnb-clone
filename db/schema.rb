@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 20161116230255) do
     t.datetime "token_expiry"
     t.string   "country"
     t.date     "registered_at"
-    t.string   "phone"
     t.string   "picture_url"
     t.string   "avatar_url"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
