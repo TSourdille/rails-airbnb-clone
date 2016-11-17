@@ -1,11 +1,13 @@
 class BookingsController < ApplicationController
   def create
-    boat = Boat.find(params[:boat_id])
-    booking = boat.bookings.new(booking_params)
-    if booking.save
-      redirect_to boat
+    @boat = Boat.find(params[:boat_id])
+    @booking = @boat.bookings.new(booking_params)
+    @booking.user = current_user
+    if @booking.save
+      redirect_to @boat
     else
-      render 'boats/show'
+      flash[:alert] = "Your selected dates are unavailable"
+      render 'boats/show', boat: @boat, booking: @booking
     end
   end
 
