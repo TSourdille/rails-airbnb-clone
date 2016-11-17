@@ -50,7 +50,8 @@ def seed(boolean_array)
       case index
       when 0
         if boolean
-          seed_users(prompt_for_user_number)
+          json_file = prompt_for_json_file("randomuser")
+          seed_users(json_file, prompt_for_user_number)
         end
       when 1
         if boolean
@@ -58,7 +59,7 @@ def seed(boolean_array)
           if User.count < 1
             typeset("You need to create users before creating boats !\n".light_magenta)
           else
-            json_file = prompt_for_json_file
+            json_file = prompt_for_json_file("samboat")
             seed_boats(json_file)
           end
         end
@@ -79,18 +80,24 @@ def seed(boolean_array)
   end
 end
 
-def seed_users(number)
+def seed_users(json_file, number)
+  users = JSON.parse(File.read(json_file))
   number.times do |i|
+    u = users["#{i}"]
     user = User.new(
-    email: Faker::Internet.email,
-    password: 'theorules',
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    phone_number: Faker::PhoneNumber.cell_phone,
-    boat_license: [true, false].sample
+      first_name: u["first_name"].capitalize,
+      last_name: u["last_name"].capitalize,
+      country: u["country"].capitalize,
+      email: u["email"],
+      password: "sailaway",
+      registered_at: u["registered"].to_date,
+      phone: u["phone"],
+      picture_url: u["photo_large"],
+      avatar_url: u["photo_thumbnail"],
+      boat_license: [true, false].sample
     )
     if user.save
-      puts "#{i} - Created: #{user.first_name}".light_yellow
+      puts "#{i} - Created: #{user.country} - #{user.first_name}".light_yellow
     else
       puts "Error creating user"
     end
@@ -98,6 +105,7 @@ def seed_users(number)
 end
 
 def seed_boats(json_filepath)
+  boats = JSON.parse(File.read(json_filepath))
   number = -1
   while number < 1 || number > User.count
     typeset("\nYou have #{User.count} users\n".light_yellow)
@@ -105,8 +113,14 @@ def seed_boats(json_filepath)
     print "> "
     number = STDIN.gets.chomp.to_i
   end
+  number_boats = -1
+  while number_boats < 1 || number_boats > boats.count
+    typeset("How many boats to attribute in total? (#{boats.count} boats total)\n".light_cyan)
+    print "> "
+    number_boats = STDIN.gets.chomp.to_i
+  end
   users = User.order("RANDOM()").limit(number)
-  boats = JSON.parse(File.read(json_filepath))
+  boats = boats.select { |k, v| k.to_i < number_boats }
   while boats.empty? == false
     boats.each do |index, boat|
       owner = users.sample
@@ -173,12 +187,12 @@ def prompt_for_user_number
   STDIN.gets.chomp.to_i
 end
 
-def prompt_for_json_file
+def prompt_for_json_file(prefix)
   ignore = "db/samboat_urls_all_boats.json"
-  json_files = Dir["db/*.json"].reject { |f| f == ignore }
+  json_files = Dir["db/#{prefix}*.json"].reject { |f| f == ignore }
   index = -1
   while index < 0 || index > json_files.length
-    typeset("Which JSON file woud you like to seed from?\n".light_cyan)
+    typeset("\nWhich JSON file woud you like to seed from?\n".light_cyan)
     json_files.each_with_index { |f, i| puts "#{i.to_s.red} - #{f}" }
     print "> "
     index = STDIN.gets.chomp.to_i
