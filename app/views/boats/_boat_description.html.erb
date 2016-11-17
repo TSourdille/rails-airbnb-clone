@@ -10,8 +10,12 @@
       <dl class="dl-horizontal">
       <% clean_up_string_array(boat.specs).each do |sp| %>
       <div class="col-xs-6">
-          <dt><%= sp[0] %></dt>
-          <dd><%= sp[1] %></dd>
+        <div class="col-xs-6">
+          <strong><%= sp[0] %></strong>
+        </div>
+        <div class="col-xs-6">
+          <%= sp[1] %>
+        </div>
       </div>
       <% end %>
     </dl>
