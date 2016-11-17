@@ -51,13 +51,13 @@ ActiveRecord::Schema.define(version: 20161116230255) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "length"
     t.string   "beds"
     t.string   "image1"
     t.string   "image2"
     t.string   "image3"
-    t.float    "latitude"
-    t.float    "longitude"
     t.index ["user_id"], name: "index_boats_on_user_id", using: :btree
   end
 
@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 20161116230255) do
     t.datetime "token_expiry"
     t.string   "country"
     t.date     "registered_at"
-    t.string   "phone"
     t.string   "picture_url"
     t.string   "avatar_url"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

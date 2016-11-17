@@ -1,10 +1,20 @@
 <div class="">
   <h2>Day rate</h2>
-  <div class="day_rate"><%= @boat.day_rate %></div>
+  <div class="day_rate"><%= boat.day_rate %></div>
+  <h1>Past Bookings</h1>
+  <% boat.bookings.each do |b| %>
+  <div>
+    <% if b.persisted? %>
+      <%= b.start_at %>
+      -
+      <%= b.end_at %>
+    <% end %>
+  </div>
+  <% end %>
   <h1>New Booking</h1>
-  <%= simple_form_for [@boat, @booking] do |f| %>
+  <%= simple_form_for [boat, booking] do |f| %>
   <%= f.input :start_at, :as => :date %>
   <%= f.input :end_at, :as => :date %>
   <%= f.button :submit %>
-  <% end %>  
+  <% end %>
 </div>
