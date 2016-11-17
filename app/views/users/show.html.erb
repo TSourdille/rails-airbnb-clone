@@ -1,11 +1,7 @@
 <div class="media">
   <div class="media-body">
     <div class="user-header">
-      <%if @user.facebook_picture_url %>
-        <%= cl_image_tag(@user.facebook_picture_url, { size: '80x70', r: 'max'} ) %>
-      <% else %>
-        <%= image_tag("blank-profile-picture.svg", {size: '80x70', r: 'max'}) %>
-      <% end %>
+      <%= cl_image_tag(get_user_photo(@user), size: '80x70', r: 'max') %>
       <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
       <br>
     </div>
