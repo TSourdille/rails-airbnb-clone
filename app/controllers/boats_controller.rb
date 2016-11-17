@@ -1,10 +1,17 @@
 class BoatsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
+
+
   def index
     @boats = Boat.all
+    if params[:destination].empty?
+      @boats = Boat.all
+    else params[:destination]
+      @boats = Boat.near(params[:destination].capitalize, 60)
+    end
 
-    @boat_location = Boat.where.not(latitude: nil, longitude: nil)
+    @boat_location = @boats.where.not(latitude: nil, longitude: nil)
     @hash = Gmaps4rails.build_markers(@boat_location) do |boat, marker|
       marker.lat boat.latitude
       marker.lng boat.longitude
