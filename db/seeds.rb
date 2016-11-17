@@ -1,4 +1,4 @@
-MODELS = [User, Boat, Availability, Booking]
+MODELS = [User, Boat, Booking]
 
 def delete_seed
   typeset_title("Deleting seed", "light_red")
@@ -64,11 +64,6 @@ def seed(boolean_array)
           end
         end
       when 2
-        if boolean
-          typeset_title("Seeding availabilities", "light_green")
-          inform_not_available
-        end
-      when 3
         if boolean
           typeset_title("Seeding bookings", "light_green")
           seed_bookings
@@ -153,37 +148,26 @@ def seed_boats(json_filepath)
   sleep(2)
 end
 
-def get_reviews
-  json_filepath = prompt_for_json_file("samboat")
-  boats = JSON.parse(File.read(json_filepath)).reject { |k, v| v["reviews"].empty? || v["reviews"].nil? }
-  boat_ids = boats.map { |k, v| k.to_s }
-  boats[boat_ids.sample]["reviews"]
-end
-
-def prompt_booking_past_future
-  answers = {}
-  typeset("\nSeed bookings in the PAST? [y/n] ".light_cyan)
-  answers[:past] = STDIN.gets.chomp
-  typeset("\nSeed bookings in the FUTURE? [y/n] ".light_cyan)
-  answers[:future] = STDIN.gets.chomp
-  answers
-end
-
 def seed_bookings
-  reviews = get_reviews
+  boat_ids_reviews = boats_with_reviews
   answers = prompt_booking_past_future
-  if answers[:past] == "y"
-    create_boat_bookings(reviews, -1)
-  end
-  if answers[:future] == "y"
-    create_boat_bookings(reviews, 1)
-  end
+  create_boat_bookings(boat_ids_reviews, -1) if answers[:past] == "y"
+  create_boat_bookings(boat_ids_reviews, 1) if answers[:future] == "y"
 end
 
-def create_boat_bookings(reviews, past_future)
-  reviews = reviews.to_a
+def boats_with_reviews
+  json_filepath = prompt_for_json_file("samboat")
+  JSON.parse(File.read(json_filepath)).reject { |k, v| v["reviews"].empty? || v["reviews"].nil? }
+end
+
+def create_boat_bookings(boats, past_future)
+  boat_ids = boats.map { |k, v| k.to_s }
   Boat.all.each do |boat|
-    random_number = rand(0...3)
+    boat_id = boat_ids.sample
+    boat_ids.delete(boat_id)
+    reviews = boats[boat_id]["reviews"]
+    reviews = reviews.to_a
+    random_number = rand(1...5)
     random_number.times do
       random_user = User.offset(rand(0..User.count-1)).first
       random_date_start_offset = Date.today + rand(1..20) * past_future
@@ -210,6 +194,15 @@ def create_boat_bookings(reviews, past_future)
       print "#{Booking.last.boat.name}".light_yellow + " - " + "#{Booking.last.user_rating}".light_cyan + "                  \r"
     end
   end
+end
+
+def prompt_booking_past_future
+  answers = {}
+  typeset("\nSeed bookings in the PAST? [y/n] ".light_cyan)
+  answers[:past] = STDIN.gets.chomp
+  typeset("\nSeed bookings in the FUTURE? [y/n] ".light_cyan)
+  answers[:future] = STDIN.gets.chomp
+  answers
 end
 
 def prompt_user(model, action)
