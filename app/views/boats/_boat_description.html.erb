@@ -7,18 +7,20 @@
 
     <h2>Boat specs</h2>
     <div class="boat-specs">
-      <dl class="dl-horizontal">
-      <% clean_up_string_array(boat.specs).each do |sp| %>
-      <div class="col-xs-6">
-        <div class="col-xs-6">
-          <strong><%= sp[0] %></strong>
-        </div>
-        <div class="col-xs-6">
-          <%= sp[1] %>
-        </div>
-      </div>
+      <% 2.times do |i| %>
+        <% split_in_half(clean_up_string_array(boat.specs), i+1).each do |sp| %>
+          <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="boat-spec">
+              <table class="table">
+                <tr>
+                  <td><strong><%= sp[0] %></strong></td>
+                  <td class="text-right"><span><%= sp[1] %></span></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        <% end %>
       <% end %>
-    </dl>
     </div>
 
     <h2>Boat equipment</h2>

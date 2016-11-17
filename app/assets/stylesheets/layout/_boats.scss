@@ -11,10 +11,25 @@
 }
 .boat-content {
 }
+.boat-specs {
+  table {
+    margin: 0;
+  }
+  td > span {
+    text-align: left;
+    width: 100%
+  }
+  td > strong {
+    text-align: right;
+  }
+}
+.boat-spec {
+  height: 70px;
+}
 .boat-equipment {
   .boat-spec-strike {
     font-weight: lighter;
-    color: $gray-strikethrough;  
+    color: $gray-strikethrough;
   }
 }
 .boat-description-all {

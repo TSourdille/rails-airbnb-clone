@@ -12,4 +12,12 @@ module BoatsHelper
     end
     equip
   end
+
+  def split_in_half(specs, half)
+    case half
+    when 1 then specs = specs.select.with_index { |s, i| i <= (specs.count)/2 }
+    when 2 then specs = specs.select.with_index { |s, i| i > (specs.count)/2 }
+    end
+    specs
+  end
 end
