@@ -20,4 +20,8 @@ module BoatsHelper
     end
     specs
   end
+
+  def get_non_owner_user(owner)
+    User.where.not(id: owner.id).offset(rand(User.count-1)).first
+  end
 end

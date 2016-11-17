@@ -35,7 +35,21 @@
 
     <h2>Reviews</h2>
     <div class="boat-reviews">
-      <%#= boat.reviews %>
+      <% boat.bookings.where.not(user_review: nil).each do |booking| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= image_tag(get_user_photo(booking.user), class: "avatar") %>
+          <%= booking.user.first_name %>
+          <% booking.user_rating.times do %>
+            <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+          <% end %>
+        </div>
+        <div class="panel-body">
+          <%= booking.user_review %>
+        </div>
+      </div>
+      <% end %>
     </div>
+    <div class="padding-bottom-page"></div>
   </div>
 </div>
