@@ -91,7 +91,7 @@ def seed_users(json_file, number)
       email: u["email"],
       password: "sailaway",
       registered_at: u["registered"].to_date,
-      phone: u["phone"],
+      phone_number: u["phone"],
       picture_url: u["photo_large"],
       avatar_url: u["photo_thumbnail"],
       boat_license: [true, false].sample
