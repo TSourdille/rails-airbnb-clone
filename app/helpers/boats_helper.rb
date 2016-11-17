@@ -24,4 +24,12 @@ module BoatsHelper
   def get_non_owner_user(owner)
     User.where.not(id: owner.id).offset(rand(User.count-1)).first
   end
+
+  def bookings_with_reviews(boat)
+    boat.bookings.where.not(user_review: nil)
+  end
+
+  def split_on_lines(text)
+    text.split("\n").map { |t| "<p>" + t + "</p>" }.join("").html_safe
+  end
 end

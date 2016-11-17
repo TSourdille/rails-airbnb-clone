@@ -2,7 +2,7 @@
   <div class="boat-description-all">
     <h2>Description</h2>
     <div class="boat-description">
-      <%= boat.description %>
+      <%= split_on_lines(boat.description) %>
     </div>
 
     <h2>Boat specs</h2>
@@ -35,7 +35,7 @@
 
     <h2>Reviews</h2>
     <div class="boat-reviews">
-      <% boat.bookings.where.not(user_review: nil).each do |booking| %>
+      <% bookings_with_reviews(boat).each do |booking| %>
       <div class="panel panel-default">
         <div class="panel-heading">
           <%= image_tag(get_user_photo(booking.user), class: "avatar") %>
@@ -49,9 +49,11 @@
         </div>
       </div>
       <% end %>
-      <div class="">
-        No reviews yet
-      </div>
+      <% if bookings_with_reviews(boat).empty? %>
+        <div class="">
+          No reviews yet
+        </div>
+      <% end %>
     </div>
     <div class="padding-bottom-page"></div>
   </div>
