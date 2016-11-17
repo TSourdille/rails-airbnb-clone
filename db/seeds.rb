@@ -71,7 +71,7 @@ def seed(boolean_array)
       when 3
         if boolean
           typeset_title("Seeding bookings", "light_green")
-          inform_not_available
+          seed_bookings
         end
       end
     end
@@ -85,16 +85,16 @@ def seed_users(json_file, number)
   number.times do |i|
     u = users["#{i}"]
     user = User.new(
-      first_name: u["first_name"].capitalize,
-      last_name: u["last_name"].capitalize,
-      country: u["country"].capitalize,
-      email: u["email"],
-      password: "sailaway",
-      registered_at: u["registered"].to_date,
-      phone_number: u["phone"],
-      picture_url: u["photo_large"],
-      avatar_url: u["photo_thumbnail"],
-      boat_license: [true, false].sample
+    first_name: u["first_name"].capitalize,
+    last_name: u["last_name"].capitalize,
+    country: u["country"].capitalize,
+    email: u["email"],
+    password: "sailaway",
+    registered_at: u["registered"].to_date,
+    phone_number: u["phone"],
+    picture_url: u["photo_large"],
+    avatar_url: u["photo_thumbnail"],
+    boat_license: [true, false].sample
     )
     if user.save
       puts "#{i} - Created: #{user.country} - #{user.first_name}".light_yellow
@@ -153,20 +153,61 @@ def seed_boats(json_filepath)
   sleep(2)
 end
 
+def get_reviews
+  json_filepath = prompt_for_json_file("samboat")
+  boats = JSON.parse(File.read(json_filepath)).reject { |k, v| v["reviews"].empty? || v["reviews"].nil? }
+  boat_ids = boats.map { |k, v| k.to_s }
+  boats[boat_ids.sample]["reviews"]
+end
+
+def prompt_booking_past_future
+  answers = {}
+  typeset("\nSeed bookings in the PAST? [y/n] ".light_cyan)
+  answers[:past] = STDIN.gets.chomp
+  typeset("\nSeed bookings in the FUTURE? [y/n] ".light_cyan)
+  answers[:future] = STDIN.gets.chomp
+  answers
+end
+
 def seed_bookings
+  reviews = get_reviews
+  answers = prompt_booking_past_future
+  if answers[:past] == "y"
+    create_boat_bookings(reviews, -1)
+  end
+  if answers[:future] == "y"
+    create_boat_bookings(reviews, 1)
+  end
+end
+
+def create_boat_bookings(reviews, past_future)
+  reviews = reviews.to_a
   Boat.all.each do |boat|
-    rand(1..3).times do
-      Booking.new(
-      boat_id: boat,
-      user_id: nil,
-      start_at: nil,
-      end_at: nil,
-      user_review: nil,
+    random_number = rand(0...3)
+    random_number.times do
+      random_user = User.offset(rand(0..User.count-1)).first
+      random_date_start_offset = Date.today + rand(1..20) * past_future
+      random_date_end_offset = random_date_start_offset + rand(1..7)
+      if past_future == 1 || reviews.empty? || random_date_end_offset > Date.today
+        review_desc = nil
+        review_rating = nil
+      else
+        review = reviews.sample
+        review_desc = review["description"]
+        review_rating = review["rating"]
+        reviews.delete(review)
+      end
+      boat.bookings.create(
+      user_id: random_user.id,
+      start_at: random_date_start_offset,
+      end_at: random_date_end_offset,
+      user_review: review_desc,
       owner_review: nil,
-      user_rating: nil,
+      user_rating: review_rating,
       owner_rating: nil,
       validated_at: nil
       )
+      print "#{Booking.last.boat.name}".light_yellow + " - " + "#{Booking.last.user_rating}".light_cyan + "                  \r"
     end
   end
 end
@@ -206,7 +247,7 @@ def inform_not_available
 end
 
 def typeset(string)
-  string.each_char { |chr| print chr ; sleep(0.026) }
+  string.each_char { |chr| print chr ; sleep(0.023) }
 end
 
 def typeset_title(string, color)
