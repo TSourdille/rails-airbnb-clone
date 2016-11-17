@@ -1,23 +1,29 @@
 
 <div class="media">
-  <div class="media-body">
-    <div class="media-section">
-      <div class="container">
-        <%= render 'boat_title' %>
-        <%= render 'boat_photos' %>
-        <%= render 'boat_info' %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-8">
+      <div class="media-body">
+        <div class="media-section">
+          <div class="container">
+            <%= render 'boat_title' %>
+            <%= render 'boat_photos' %>
+            <%= render 'boat_info' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <div class="media-aside">
+        <div class="media-section">
+          <%= render 'boat_booking' %>
+        </div>
+        <div class="media-section">
+          <%= render 'boat_map' %>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="media-aside">
-    <div class="media-section">
-      <%= render 'boat_booking' %>
-    </div>
-    <div class="media-section">
-      <%= render 'boat_map' %>
-    </div>
-  </div>
 </div>
 
 <%= render 'boat_owner' %>
