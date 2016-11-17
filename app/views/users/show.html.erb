@@ -1,55 +1,58 @@
 <div class="media">
   <div class="media-body">
     <div class="user-header">
-      <% if @user.facebook_picture_url %>
-        <%= cl_image_tag(@user.facebook_picture_url, { size: '65x60', r: 'max'} ) %>
-      <% else %>
-        <%= image_tag("blank-profile-picture.svg", {size: '65x60', r: 'max'}) %>
-      <% end %>
+      <%= cl_image_tag(get_user_photo(@user), size: '80x70', r: 'max') %>
       <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
+      <br>
     </div>
-    <br>
 
-    <h4>Phone number : <h4>
-    <p> <%= @user.phone_number %> </p>
-
-    <div class="media-section">
-      <% @user.boats.each do |b| %>
-        <% if b.photos %>
-          <%= cl_image_tag(b.photos&.first&.path) %>
-        <% else %>
-          <%= "No pictures for this boat" %>
-        <% end %>
+      <%if @user.phone_number.nil? %>
+      <br>
+        <p> <em>* No contact for this user </em></p>
+      <% else %>
+      <br>
+        <h4>Contact : <h4>
+        <p> <%= @user.phone_number %> </p>
       <% end %>
 
-    </div>
-    <div class="media-section">
-      <%unless @user.boats.empty?  %>
-        <h2> <%= @user.first_name %>'s Boat(s)</h2>
+    <div class="media-section text-center">
 
+      <%unless @user.boats.empty?  %>
+
+        <h2> Les bateaux de <%= @user.first_name %></h2>
         <br>
         <% @user.boats.each do |b| %>
           <hr>
-          <p> <strong> <%= b.name %> </strong> </p>
-          <p> <em> <%= b.boat_type %> </em> </p>
-          <%= link_to "Check this boat", b %>
+          <div class="boat-picture">
+            <p> <strong id="boat-name"> <%= b.name.upcase %> </strong> </p>
+            <br>
+            <% if b.image1 || b.image2 || b.image3 %>
+              <%= image_tag(b.image1, { size: '220x200', r: 'max'}) %>
+              <br>
+              <br>
+
+            <% else %>
+              <%= image_tag("http://placehold.it/220x200") %>
+            <% end %>
+          </div>
+          <br>
+          <div class="flex-summary">
+          <br>
           <hr>
-          <p> <strong> Capacité : </strong>  <%= b.capacity %> </p>
-          <br>
-          <%= b.description %>
-          <br>
-          <%= b.day_rate %>
-          <br>
-        <% end %>
+            <p> <strong> . <%= b.boat_type %> </strong> </p>
+            <p> <strong> . Capacité : </strong>  <%= b.capacity %> </p>
+            <hr>
+              <div class="boat-summary-box">
+              <em> <p> <strong> Détails : </strong></p> <%= b.description[0..800].capitalize %>... </em>
+              </div>
+            <hr>
+              <%= link_to "En savoir plus !", b %>
+            <hr>
+          </div>
+        <%end %>
       <%end %>
+
     </div>
-  </div>
-  <div class="media-aside">
-    <div class="media-section">
-      <h2>Share</h2>
-    </div>
-    <div class="media-section">
-      <h2>382 upvotes</h2>
-    </div>
+
   </div>
 </div>

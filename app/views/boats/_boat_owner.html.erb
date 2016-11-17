@@ -1,12 +1,7 @@
 <div class="container">
   <h2>Owner</h2>
-  <% if @boat.user.photo? %>
-    <% photo = @boat.user.photo %>
-  <% elsif @boat.user.facebook_picture_url %>
-    <% photo = @boat.user.facebook_picture_url %>
-  <% end %>
-  <%= link_to @boat.user do %>
-    <%= cl_image_tag(photo, class: "avatar-large") %>
-    <%= @boat.user.first_name %>
+  <%= link_to boat.user do %>
+    <%= cl_image_tag(get_user_photo(boat.user), class: "avatar-large") %>
+    <%= boat.user.first_name %>
   <% end %>
 </div>

@@ -1,9 +1,10 @@
 <div class="banner-container" style="background-image: url(<%= asset_path 'banner_picture.png' %>) ">
 
-  <div class="log-box">
+  <div class="log-box" method="post">
     <form action="boats">
       <p class="home-form-label text-center">Destination :</p>
-      <input type="text"> <br>
+      <input type="text" name="destination">
+      <br>
       <br>
       <br>
       <input type="submit" value="Find Boats" class= "home-form-button center-block btn btn-warning">
@@ -16,7 +17,7 @@
 <div class="map-container">
 
   <div class="map-box">
-    <%= image_tag("france_map.png", width: '600', height: '540') %>
+    <%= image_tag("france_map.png", width: '500', class: 'img-responsive') %>
   </div>
 
   <div class="city-box">

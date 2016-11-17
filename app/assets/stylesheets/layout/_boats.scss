@@ -11,7 +11,11 @@
 }
 .boat-content {
 }
-.boat-specs {
+.boat-equipment {
+  .boat-spec-strike {
+    font-weight: lighter;
+    color: $gray-strikethrough;  
+  }
 }
 .boat-description-all {
   display: flex;

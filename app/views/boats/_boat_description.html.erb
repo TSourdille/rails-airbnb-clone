@@ -2,29 +2,34 @@
   <div class="boat-description-all">
     <h2>Description</h2>
     <div class="boat-description">
-      <%= @boat.description %>
+      <%= boat.description %>
     </div>
 
     <h2>Boat specs</h2>
     <div class="boat-specs">
-      <% @boat.specs.split("\n").each do |sp| %>
+      <dl class="dl-horizontal">
+      <% clean_up_string_array(boat.specs).each do |sp| %>
       <div class="col-xs-6">
-        <%= sp %>
+          <dt><%= sp[0] %></dt>
+          <dd><%= sp[1] %></dd>
       </div>
       <% end %>
+    </dl>
     </div>
 
     <h2>Boat equipment</h2>
     <div class="boat-equipment">
-      <% @boat.equipment.split("\n").each do |equip| %>
+      <% clean_up_string_array(boat.equipment).each do |equip| %>
       <div class="col-xs-4">
         <%# TODO: substitute _ and - %>
-        <%= equip.gsub("?", "") %>
+        <%= apply_booleans(equip).html_safe %>
       </div>
       <% end %>
     </div>
 
     <h2>Reviews</h2>
-    <div class="boat-reviews"><%#= @boat.reviews %></div>
+    <div class="boat-reviews">
+      <%#= boat.reviews %>
+    </div>
   </div>
 </div>

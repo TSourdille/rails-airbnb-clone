@@ -3,12 +3,12 @@
     <h2>Boat info</h2>
     <div class="col-xs-3 col-sm-6">
       <div class="boat-info">
-        <% image_url = @boat.boat_type.downcase + ".png"  %>
+        <% image_url = boat.boat_type.downcase + ".png"  %>
         <%= image_tag(image_url, class: "") %>
-        <%= @boat.boat_type %>
+        <%= boat.boat_type %>
       </div>
     </div>
-    <% {ruler: @boat.length, person: @boat.capacity, bed: @boat.beds}.each do |key, value| %>
+    <% {ruler: boat.length, person: boat.capacity, bed: boat.beds}.each do |key, value| %>
       <div class="col-xs-3 col-sm-6">
         <div class="boat-info">
           <%= image_tag(key.to_s + ".svg", style: "height: 50px; max-width: 50px;", class: "") %>
