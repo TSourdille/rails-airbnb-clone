@@ -45,4 +45,9 @@ module BoatsHelper
     end
     photos
   end
+
+  def boat_avg_ratings(bookings)
+    rating_total = bookings.map { |b| b.user_rating }.reject { |r| r.nil? }
+    rating_total.reduce(:+) / (rating_total.count)
+  end
 end

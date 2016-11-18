@@ -5,9 +5,9 @@
       <div class="media-body full-width">
         <div class="media-section width: 100%;">
           <div class="container">
-            <%= render 'boats/boat_title', boat: @boat %>
-            <%= render 'boats/boat_photos', boat: @boat %>
-            <%= render 'boats/boat_info', boat: @boat %>
+            <%= render 'boats/title', boat: @boat %>
+            <%= render 'boats/photos', boat: @boat %>
+            <%= render 'boats/info', boat: @boat %>
           </div>
         </div>
       </div>
@@ -15,10 +15,10 @@
     <div class="col-xs-12 col-md-4">
       <div class="media-aside">
         <div class="media-section">
-          <%= render 'boats/boat_booking', boat: @boat, booking: @booking %>
+          <%= render 'boats/booking', boat: @boat, booking: @booking %>
         </div>
         <div class="media-section">
-          <%= render 'boats/boat_map', boat: @boat, hash: @hash %>
+          <%= render 'boats/map', boat: @boat, hash: @hash %>
         </div>
       </div>
     </div>
@@ -26,4 +26,4 @@
 
 </div>
 
-<%= render 'boats/boat_description', boat: @boat, boat: @boat %>
+<%= render 'boats/description', boat: @boat, boat: @boat %>
