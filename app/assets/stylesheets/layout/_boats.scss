@@ -42,6 +42,10 @@
 .boat-description-all {
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
+}
+.boat-description-all > * {
+  margin: 20px;
 }
 .boat-title {
   display: flex;
