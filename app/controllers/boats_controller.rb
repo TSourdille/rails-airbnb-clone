@@ -4,21 +4,18 @@ class BoatsController < ApplicationController
   def index
     if params[:destination].blank?
       @boats = Boat.all
+      build_markers(boats_with_location(@boats))
     elsif Boat.near(params[:destination], 60).blank?
       flash[:alert] = "Pas de bateaux à #{params[:destination].capitalize} :("
       redirect_to root_path
     else
       @boats = Boat.near(params[:destination].capitalize, 60)
-    end
-
-    @boat_location = @boats.where.not(latitude: nil, longitude: nil)
-    @hash = Gmaps4rails.build_markers(@boat_location) do |boat, marker|
-      marker.lat boat.latitude
-      marker.lng boat.longitude
+      build_markers(boats_with_location(@boats))
     end
   end
 
   def show
+    raise
     @boat = Boat.find(params[:id])
     @user = current_user
     @bookings = @boat.bookings
@@ -69,5 +66,16 @@ class BoatsController < ApplicationController
     :day_rate,
     photos: []
     )
+  end
+
+  def build_markers(boats)
+    @hash = Gmaps4rails.build_markers(boats) do |boat, marker|
+      marker.lat boat.latitude
+      marker.lng boat.longitude
+    end
+  end
+
+  def boats_with_location(boats)
+    boats.where.not(latitude: nil, longitude: nil)
   end
 end
