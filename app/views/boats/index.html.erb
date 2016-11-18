@@ -9,7 +9,7 @@
       <% @boats.each do |boat| %>
       <div class="col-xs-12 col-sm-6 col-md-4">
           <%= link_to boat_path(boat) do %>
-          <%= render 'boats/boat_cards', boat: boat %>
+          <%= render 'boats/cards', boat: boat %>
           <% end %>
       </div>
       <% end %>

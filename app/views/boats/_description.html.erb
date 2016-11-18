@@ -43,6 +43,9 @@
           <% booking.user_rating.times do %>
             <i class="fa fa-star fa-lg" aria-hidden="true"></i>
           <% end %>
+          <% (5 - booking.user_rating).times do %>
+            <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+          <% end %>
         </div>
         <div class="panel-body">
           <%= booking.user_review %>

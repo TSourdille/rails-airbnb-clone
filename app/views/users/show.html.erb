@@ -1,9 +1,10 @@
 
 <div class="container">
+  <div class="user">
       <div class="col-sm-12">
         <div class="col-sm-4">
           <%= image_tag(user_photo(@user),id: "image-medium", class: "img-circle center-block") %>
-          <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
+          <h1 class="text-center"> <%= @user.first_name  %> <%= @user.last_name%> </h1>
 
           <% if  @user.phone_number %>
             <p> <%= image_tag "phone.png" %>  <%= @user.phone_number %></p>
@@ -33,22 +34,17 @@
           <% end %>
         </div>
       </div>
-
-
-
-      <div class="row col-sm-12">
+      <div class="row col-sm-12 padding-bottom-page">
         <hr>
         <h3 class="text-center"><%= @user.first_name %> boats</h3>
         <hr>
         <% @user.boats.each do |boat| %>
-          <div class="col-xs-12 col-sm-4">
+          <div class="col-xs-12 col-sm-4" style="margin-top: 10px">
             <%= link_to boat_path(boat) do %>
               <%= render 'user_boat_cards', boat: boat %>
             <% end %>
           </div>
         <% end %>
       </div>
+  </div>
 </div>
-
-
-

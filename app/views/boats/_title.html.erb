@@ -1,0 +1,18 @@
+<div class="boat-title">
+  <strong class="boat-name"><%= boat.name %></strong>
+  <em class="boat-city"><%= boat.city %></em>
+  <div style="margin-left: 20px;">
+    <% if boat.bookings.where.not(user_rating: nil).blank? %>
+    <em>No ratings yet</em>
+    <% else %>
+    <span>
+      <% boat_avg_ratings(boat.bookings).times do %>
+      <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+      <% end %>
+      <% (5 - boat_avg_ratings(boat.bookings)).times do %>
+      <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+      <% end %>
+    </span>
+    <% end %>
+  </div>
+</div>
