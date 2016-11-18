@@ -1,4 +1,38 @@
+<div class="boat-slide-container">
+  <div id="my_boat_carousel" class="carousel slide" data-ride="carousel">
+    <!-- Bulles -->
+    <ol class="carousel-indicators">
+      <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#my_carousel" data-slide-to="1"></li>
+      <li data-target="#my_carousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <!-- Page 1 -->
+      <div class="item active">
+        <div class="carousel-page-for-boats" >
+          <%= image_tag (@boat.image1)%>
+        </div>
+      </div>
+      <!-- Page 2 -->
+      <div class="item">
+        <%= image_tag(@boat.image2)%>
+      </div>
 
+      <!-- Page 3 -->
+      <div class="item">
+          <%= image_tag(@boat.image3) %>
+      </div>
+    </div>
+
+
+    <a class="left carousel-control" href="#my_carousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#my_carousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
 <div class="media">
   <div class="row">
     <div class="col-xs-12 col-md-8">
@@ -6,7 +40,6 @@
         <div class="media-section width: 100%;">
           <div class="container">
             <%= render 'boat_title', boat: @boat %>
-            <%= render 'boat_photos', boat: @boat %>
             <%= render 'boat_info', boat: @boat %>
           </div>
         </div>
