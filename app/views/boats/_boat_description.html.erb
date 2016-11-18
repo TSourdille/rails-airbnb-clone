@@ -38,7 +38,7 @@
       <% bookings_with_reviews(boat).each do |booking| %>
       <div class="panel panel-default">
         <div class="panel-heading">
-          <%= image_tag(get_user_photo(booking.user), class: "avatar") %>
+          <%= image_tag(user_photo(booking.user), class: "avatar") %>
           <%= booking.user.first_name %>
           <% booking.user_rating.times do %>
             <i class="fa fa-star fa-lg" aria-hidden="true"></i>

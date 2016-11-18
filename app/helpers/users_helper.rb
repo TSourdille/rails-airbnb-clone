@@ -1,6 +1,6 @@
 module UsersHelper
 
-  def get_user_photo(user)
+  def user_photo(user)
     if user.photo?
       photo = user.photo
     elsif user.facebook_picture_url.nil? == false

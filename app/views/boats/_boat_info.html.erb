@@ -3,7 +3,7 @@
     <div class="col-xs-2">
       <h2>Owner</h2>
       <%= link_to boat.user do %>
-      <%= cl_image_tag(get_user_photo(boat.user), class: "avatar-large") %>
+      <%= cl_image_tag(user_photo(boat.user), class: "avatar-large") %>
       <%= boat.user.first_name %>
       <% end %>
     </div>
