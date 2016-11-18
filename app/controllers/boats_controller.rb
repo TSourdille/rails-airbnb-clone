@@ -15,7 +15,6 @@ class BoatsController < ApplicationController
   end
 
   def show
-    raise
     @boat = Boat.find(params[:id])
     @user = current_user
     @bookings = @boat.bookings
