@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="boat-list">
-    <h2 class="boat-header text-center">Found <%= pluralize(@boats.size, "boat") %></h2>
+    <h2 class="boat-header text-center"><%= pluralize(@boats.size, "bateau") %> trouvé !</h2>
     <div class="row">
       <% @boats.each do |boat| %>
       <div class="col-xs-12 col-sm-6 col-md-4">
