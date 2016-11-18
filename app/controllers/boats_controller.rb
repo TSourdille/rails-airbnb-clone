@@ -2,10 +2,12 @@ class BoatsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @boats = Boat.all
     if params[:destination].blank?
       @boats = Boat.all
-    else params[:destination]
+    elsif Boat.near(params[:destination], 60).blank?
+      flash[:alert] = "Pas de bateaux à #{params[:destination].capitalize} :("
+      redirect_to root_path
+    else
       @boats = Boat.near(params[:destination].capitalize, 60)
     end
 
