@@ -1,7 +1,7 @@
 <div class="container">
       <div class="col-sm-12">
-        <div class="col-sm-4 ">
-          <%= image_tag(get_user_photo(@user), class: "img-circle center-block") %>
+        <div class="col-sm-4">
+          <%= image_tag(get_user_photo(@user),id: "image-medium", class: "img-circle center-block") %>
           <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
 
           <% if  @user.phone_number %>
@@ -19,7 +19,7 @@
           <% end %>
         </div>
 
-        <div class="col-sm-8">
+        <div class="col-sm-6 col-sm-offset-2">
           <% if @user == current_user %>
             <h2>Bookings :</h2>
             <% bookings = bookings_by_time(@user.bookings) %>

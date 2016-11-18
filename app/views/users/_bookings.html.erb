@@ -1,3 +1,5 @@
 <% bookings.each do |b| %>
-    <%= b.boat.name %> <%= b.start_at %> to <%= b.end_at %>
+  <p class=""><strong><%= b.boat.name %></strong></p>
+  <p><%= b.start_at %> to <%= b.end_at %></p>
+  <br>
 <% end %>
