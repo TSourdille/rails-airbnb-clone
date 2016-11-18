@@ -1,44 +1,43 @@
-<div class="banner-container" style="background-image: url(<%= asset_path 'banner_picture.png' %>) ">
-
-  <div class="log-box" method="post">
-    <form action="boats">
-      <p class="home-form-label text-center">Destination :</p>
-      <input type="text" name="destination">
-      <br>
-      <br>
-      <br>
-      <input type="submit" value="Find Boats" class= "home-form-button center-block btn btn-warning">
-    </form>
-
-  </div>
-
-</div>
-
-<div class="map-container">
-
-  <div class="map-box">
-    <%= image_tag("france_map.png", width: '500', class: 'img-responsive') %>
-  </div>
-
-  <div class="city-box">
-    <div class="city-box-content">
-
-      <ul>
-        <li>Perpigan</li>
-        <li>Marseille</li>
-        <li>Aix-en-Provence</li>
-        <li>Cap-D'Agde</li>
-        <li>Bamako</li>
-        <li>Somalie</li>
-        <li>Et bien d'autres encore !</li>
-      </ul>
+<div id="my_carousel" class="carousel slide" data-ride="carousel">
+  <!-- Bulles -->
+  <ol class="carousel-indicators">
+    <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#my_carousel" data-slide-to="1"></li>
+    <li data-target="#my_carousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <!-- Page 1 -->
+    <div class="item active">
+      <div class="carousel-page">
+        <%= image_tag "homepage15.jpg"%>
+      </div>
     </div>
-  </div>
+    <!-- Page 2 -->
+    <div class="item">
+      <%= image_tag "homepage14.jpg"%>
+    </div>
 
+    <!-- Page 3 -->
+    <div class="item">
+      <div class="carousel-page">
+        <%= image_tag "homepage17.jpg" %>
+      </div>
+    </div>
+    
+  </div>
+  <a class="left carousel-control" href="#my_carousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#my_carousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
 </div>
 
-<div class="sample-boats-container">
-    <%= image_tag("http://placehold.it/300x400") %>
-    <%= image_tag("http://placehold.it/300x400") %>
-    <%= image_tag("http://placehold.it/300x400") %>
+<div class="log-box">
+  <form class= "dest-box" action="boats">
+    <p class="home-form-label text-center"></p>
+    <input class="home-form-text text-center" type="text" name="destination" placeholder="Choisissez une ville"> <br>
+    <br>
+    <input type="submit" value="A l'abordage !" class= "home-form-button center-block btn btn-warning">
+  </form>
 </div>

@@ -1,6 +1,4 @@
 #banner_picture {
-  width: 100%;
-  height: 70%
 }
 
 .site-content {
@@ -15,22 +13,33 @@
   background-position: center center;
   background-size: cover;
   width: 100%;
-  height: 60vh;
+  height: 90vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-image: url(images/banner_picture.png);
 }
 
 .log-box {
-  width: 25%;
+  width: 35%;
   min-width: 15%;
-  height: 100%;
+  height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0, 0.65);
-  margin-right: 45%;
+  background-color: rgba(0,0,0, 0.2);
+  position: absolute;
+  position: absolute;
+  left: 32%;
+  bottom: 30%;
+  border-radius: 10px;
+}
+
+.home-form-text {
+  font-size: 18px;
+  padding-right: 75px;
+  padding-left: 75px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .text-box {
@@ -73,7 +82,7 @@
 }
 
 .sample-boats-container {
-  background-color: rgba(2,74,130, 0.8);
+  background-color: rgba(2,74,130, 0.35);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -90,4 +99,32 @@
   border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
+}
+
+.carousel-page {
+  width:100%;
+  height:400px;
+  background-color:#5f666d;
+  color:white;
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  }
+
+.carousel-page img{
+  width:100%;
+  height:100%;
+
+  }
+
+.item {
+  max-height: 90vh;
+  img {
+    height: 100vh;
+  }
 }

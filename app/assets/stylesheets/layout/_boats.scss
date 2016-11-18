@@ -5,16 +5,35 @@
   padding-bottom: 30px;
 }
 .boat-info {
-  height: 100px;
-  width: 200px;
-  margin: 0;
+  // height: 100px;
+  // margin: 0;
+  // width: 600px;
+}
+.boat-info-icon {
+  height: 65px;
+  width: 65px;
 }
 .boat-content {
+}
+.boat-specs {
+  table {
+    margin: 0;
+  }
+  td > span {
+    text-align: left;
+    width: 100%
+  }
+  td > strong {
+    text-align: right;
+  }
+}
+.boat-spec {
+  height: 70px;
 }
 .boat-equipment {
   .boat-spec-strike {
     font-weight: lighter;
-    color: $gray-strikethrough;  
+    color: $gray-strikethrough;
   }
 }
 .boat-description-all {
@@ -26,6 +45,11 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+}
+.boat-image {
+  width: 100%;
+  max-width: 800px;
 }
 .boat-name {
   font-size: 32px;

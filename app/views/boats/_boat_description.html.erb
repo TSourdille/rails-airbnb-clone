@@ -2,19 +2,25 @@
   <div class="boat-description-all">
     <h2>Description</h2>
     <div class="boat-description">
-      <%= boat.description %>
+      <%= split_on_lines(boat.description) %>
     </div>
 
     <h2>Boat specs</h2>
     <div class="boat-specs">
-      <dl class="dl-horizontal">
-      <% clean_up_string_array(boat.specs).each do |sp| %>
-      <div class="col-xs-6">
-          <dt><%= sp[0] %></dt>
-          <dd><%= sp[1] %></dd>
-      </div>
+      <% 2.times do |i| %>
+        <% split_in_half(clean_up_string_array(boat.specs), i+1).each do |sp| %>
+          <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="boat-spec">
+              <table class="table">
+                <tr>
+                  <td><strong><%= sp[0] %></strong></td>
+                  <td class="text-right"><span><%= sp[1] %></span></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        <% end %>
       <% end %>
-    </dl>
     </div>
 
     <h2>Boat equipment</h2>
@@ -29,7 +35,26 @@
 
     <h2>Reviews</h2>
     <div class="boat-reviews">
-      <%#= boat.reviews %>
+      <% bookings_with_reviews(boat).each do |booking| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= image_tag(user_photo(booking.user), class: "avatar") %>
+          <%= booking.user.first_name %>
+          <% booking.user_rating.times do %>
+            <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+          <% end %>
+        </div>
+        <div class="panel-body">
+          <%= booking.user_review %>
+        </div>
+      </div>
+      <% end %>
+      <% if bookings_with_reviews(boat).empty? %>
+        <div class="">
+          No reviews yet
+        </div>
+      <% end %>
     </div>
+    <div class="padding-bottom-page"></div>
   </div>
 </div>
