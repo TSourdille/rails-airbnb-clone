@@ -9,7 +9,7 @@
       <% @boats.each do |boat| %>
       <div class="col-xs-12 col-sm-6 col-md-4">
           <%= link_to boat_path(boat) do %>
-          <%= render 'boat/boat_cards', boat: boat %>
+          <%= render 'boats/boat_cards', boat: boat %>
           <% end %>
       </div>
       <% end %>
@@ -25,6 +25,6 @@
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
-    <%= render 'boat/map.js.erb' %>
+    <%= render 'boats/map.js.erb' %>
   <% end %>
 <% end %>
