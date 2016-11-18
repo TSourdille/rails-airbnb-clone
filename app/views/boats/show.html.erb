@@ -1,3 +1,5 @@
+<%= render 'boats/title', boat: @boat %>
+
 <div class="boat-slide-container">
   <div id="my_boat_carousel" class="carousel slide" data-ride="carousel">
     <!-- Bulles -->
@@ -20,7 +22,7 @@
 
       <!-- Page 3 -->
       <div class="item center-block ">
-          <%= image_tag(@boat.image3, class: "center-block") %>
+        <%= image_tag(@boat.image3, class: "center-block") %>
       </div>
     </div>
 
@@ -34,24 +36,25 @@
   </div>
 </div>
 <div class="media">
-  <div class="row">
-    <div class="col-xs-12 col-md-8">
-      <div class="media-body full-width">
-        <div class="media-section width: 100%;">
-          <div class="container">
-            <%= render 'boats/title', boat: @boat %>
-            <%= render 'boats/info', boat: @boat %>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-8">
+        <div class="media-body full-width">
+          <div class="media-section width: 100%;">
+            <div class="container">
+              <%= render 'boats/info', boat: @boat %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-xs-12 col-md-4">
-      <div class="media-aside">
-        <div class="media-section">
-          <%= render 'boats/booking', boat: @boat, booking: @booking %>
-        </div>
-        <div class="media-section">
-          <%= render 'boats/map', boat: @boat, hash: @hash %>
+      <div class="col-xs-12 col-md-4">
+        <div class="media-aside">
+          <div class="media-section">
+            <%= render 'boats/booking', boat: @boat, booking: @booking %>
+          </div>
+          <div class="media-section">
+            <%= render 'boats/map', boat: @boat, hash: @hash %>
+          </div>
         </div>
       </div>
     </div>
