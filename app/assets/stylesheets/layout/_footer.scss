@@ -1,11 +1,13 @@
 /* Footer design */
 
 .wrapper-grey {
-  background: #CCCCCC;
+  background: #024A82;
 }
-.wrapper-dark-grey {
-  background: #333333;
-  color: #CCCCCC;
+.blue-wrapper {
+  background: #2c2c34;
+  color: #024A82;
+  border: solid;
+  border-color: #2c2c28;
 }
 .footer {
   width:100%;
@@ -32,6 +34,7 @@
   padding: 10px 10px;
   transition: color 15  0ms ease;
 }
+
 .footer-icon:hover {
   color: #e62117;
 }
@@ -66,4 +69,8 @@
   .footer-content .signature {
     font-size: 75%;
   }
+}
+
+.footer-mail {
+  color: white;
 }

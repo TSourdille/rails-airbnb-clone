@@ -1,44 +1,14 @@
-<div class="banner-container" style="background-image: url(<%= asset_path 'banner_picture.png' %>) ">
+<div class="banner-container" class="img-responsive" style="background-image: url(<%= asset_path 'homepage15.jpg' %>) ">
 
-  <div class="log-box" method="post">
-    <form action="boats">
-      <p class="home-form-label text-center">Destination :</p>
-      <input type="text" name="destination">
+  <div class="log-box">
+    <form class= "dest-box" action="boats">
+      <p class="home-form-label text-center"></p>
+      <input class="home-form-text text-center" type="text" name="destination" placeholder="Choisissez une ville"> <br>
       <br>
-      <br>
-      <br>
-      <input type="submit" value="Find Boats" class= "home-form-button center-block btn btn-warning">
+      <input type="submit" value="A l'abordage !" class= "home-form-button center-block btn btn-warning">
     </form>
 
   </div>
 
 </div>
 
-<div class="map-container">
-
-  <div class="map-box">
-    <%= image_tag("france_map.png", width: '500', class: 'img-responsive') %>
-  </div>
-
-  <div class="city-box">
-    <div class="city-box-content">
-
-      <ul>
-        <li>Perpigan</li>
-        <li>Marseille</li>
-        <li>Aix-en-Provence</li>
-        <li>Cap-D'Agde</li>
-        <li>Bamako</li>
-        <li>Somalie</li>
-        <li>Et bien d'autres encore !</li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-
-<div class="sample-boats-container">
-    <%= image_tag("http://placehold.it/300x400") %>
-    <%= image_tag("http://placehold.it/300x400") %>
-    <%= image_tag("http://placehold.it/300x400") %>
-</div>
