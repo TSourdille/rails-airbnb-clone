@@ -3,7 +3,7 @@ class BoatsController < ApplicationController
 
   def index
     @boats = Boat.all
-    if params[:destination].empty?
+    if params[:destination].blank?
       @boats = Boat.all
     else params[:destination]
       @boats = Boat.near(params[:destination].capitalize, 60)
