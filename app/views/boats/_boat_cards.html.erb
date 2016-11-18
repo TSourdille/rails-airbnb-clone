@@ -12,6 +12,6 @@
     <h2><%= boat.name %></h2>
     <p><%= boat.boat_type %></p>
   </div>
-  <%= image_tag get_user_photo(boat.user), class: "card-user avatar" %>
+  <%= image_tag user_photo(boat.user), class: "card-user avatar" %>
   <% link_to boat, class: "card-link" %>
 </div>

@@ -1,10 +1,13 @@
 General:
 
 - Authorize users view to non-signed in visitors
-- Corriger add boat.
 - Faire un slideshow pour home et bateaux
 - Ajouter un bouton pour liste de bateaux?
+
 - Make search bar same than home search
+- update results
+- If no results, flash notice that no results.
+
 
 Advanced:
 

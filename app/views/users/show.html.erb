@@ -1,7 +1,7 @@
 <div class="media">
   <div class="media-body">
     <div class="user-header">
-      <%= cl_image_tag(get_user_photo(@user), size: '80x70', r: 'max') %>
+      <%= cl_image_tag(user_photo(@user), size: '80x70', r: 'max') %>
       <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
       <br>
     </div>
