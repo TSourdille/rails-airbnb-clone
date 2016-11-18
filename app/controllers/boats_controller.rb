@@ -56,6 +56,13 @@ class BoatsController < ApplicationController
     :capacity,
     :description,
     :specs,
+    :length,
+    :beds,
+    :image1,
+    :image2,
+    :image3,
+    :latitude,
+    :longitude,
     :equipment,
     :day_rate,
     photos: []

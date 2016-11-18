@@ -32,4 +32,17 @@ module BoatsHelper
   def split_on_lines(text)
     text.split("\n").map { |t| "<p>" + t + "</p>" }.join("").html_safe
   end
+
+  def boat_pictures(boat)
+    if boat.photos?
+      photos = boat.photos
+    elsif boat.image1.presence
+      photos = [boat.image1]
+      photos << boat.image2 if boat.image2.presence
+      photos << boat.image3 if boat.image3.presence
+    else
+      photos = ["blank-boat-picture.svg"]
+    end
+    photos
+  end
 end

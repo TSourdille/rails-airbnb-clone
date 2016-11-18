@@ -1,14 +1,18 @@
-<h1>List your boat</h1>
+<div class="container">
+  <h1>List your boat</h1>
 
-<%= simple_form_for @boat do |f| %>
+  <%= simple_form_for @boat do |f| %>
   <%= f.input :name %>
   <%= f.input :boat_type, collection: Boat::BOAT_TYPES %>
   <%= f.input :city %>
   <%= f.input :capacity %>
   <%= f.input :description, as: :text %>
+  <%= f.input :length %>
+  <%= f.input :beds %>
   <%= f.input :specs, as: :text %>
   <%= f.input :equipment, as: :text %>
   <%= f.input :day_rate %>
   <%= f.input :photos, as: :attachinary %>
   <%= f.button :submit %>
-<% end %>
+  <% end %>
+</div>
