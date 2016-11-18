@@ -1,12 +1,13 @@
 General:
 
 - Authorize users view to non-signed in visitors
-- Make search bar same than home search
-- Faire en sorte que Google maps créé plusieurs marqueurs pour la même desstination
-- Lier les marqueurs aux bateaux
+- Corriger add boat.
 - Faire un slideshow pour home et bateaux
 - Ajouter un bouton pour liste de bateaux?
+- Make search bar same than home search
 
 Advanced:
 
 - Filter by type, feature or more.
+- Faire en sorte que Google maps créé plusieurs marqueurs pour la même destination
+- Lier les marqueurs aux bateaux
