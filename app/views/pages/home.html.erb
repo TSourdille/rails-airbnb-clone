@@ -1,10 +1,9 @@
 <div class="banner-container" class="img-responsive" style="background-image: url(<%= asset_path 'homepage15.jpg' %>) ">
 
-
   <div class="log-box">
     <form class= "dest-box" action="boats">
       <p class="home-form-label text-center"></p>
-      <input class="home-form-text text-center" type="text" placeholder="Choisissez une ville"> <br>
+      <input class="home-form-text text-center" type="text" name="destination" placeholder="Choisissez une ville"> <br>
       <br>
       <input type="submit" value="A l'abordage !" class= "home-form-button center-block btn btn-warning">
     </form>
@@ -13,31 +12,3 @@
 
 </div>
 
-<div class="map-container">
-
-  <div class="map-box">
-    <%= image_tag("france_map.png", width: '500', class: 'img-responsive') %>
-  </div>
-
-  <div class="city-box">
-    <div class="city-box-content">
-
-      <ul>
-        <li>Perpigan</li>
-        <li>Marseille</li>
-        <li>Aix-en-Provence</li>
-        <li>Cap-D'Agde</li>
-        <li>Bamako</li>
-        <li>Somalie</li>
-        <li>Et bien d'autres encore !</li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-
-<div class="sample-boats-container">
-    <%= image_tag("http://placehold.it/300x400") %>
-    <%= image_tag("http://placehold.it/300x400") %>
-    <%= image_tag("http://placehold.it/300x400") %>
-</div>
