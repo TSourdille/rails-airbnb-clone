@@ -1,58 +1,54 @@
-<div class="media">
-  <div class="media-body">
-    <div class="user-header">
-      <%= cl_image_tag(user_photo(@user), size: '80x70', r: 'max') %>
-      <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
-      <br>
-    </div>
 
-      <%if @user.phone_number.nil? %>
-      <br>
-        <p> <em>* No contact for this user </em></p>
-      <% else %>
-      <br>
-        <h4>Contact : <h4>
-        <p> <%= @user.phone_number %> </p>
-      <% end %>
+<div class="container">
+      <div class="col-sm-12">
+        <div class="col-sm-4">
+          <%= image_tag(user_photo(@user),id: "image-medium", class: "img-circle center-block") %>
+          <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
 
-    <div class="media-section text-center">
+          <% if  @user.phone_number %>
+            <p> <%= image_tag "phone.png" %>  <%= @user.phone_number %></p>
+          <% end %>
 
-      <%unless @user.boats.empty?  %>
+          <% if @user.email %>
+            <p> <%= image_tag "email.png" %>  <%= @user.email %></p>
+          <% end %>
 
-        <h2> Les bateaux de <%= @user.first_name %></h2>
-        <br>
-        <% @user.boats.each do |b| %>
-          <hr>
-          <div class="boat-picture">
-            <p> <strong id="boat-name"> <%= b.name.upcase %> </strong> </p>
-            <br>
-            <% if b.image1 || b.image2 || b.image3 %>
-              <%= image_tag(b.image1, { size: '220x200', r: 'max'}) %>
-              <br>
-              <br>
+          <% if @user.boat_license %>
+            <p><%= image_tag "license_boat.png" %>  Licensed </p>
+          <% else %>
+            <p id="license-color"><%= image_tag "license_boat.png" %>  Not Licensed</p>
+          <% end %>
+        </div>
 
-            <% else %>
-              <%= image_tag("http://placehold.it/220x200") %>
+        <div class="col-sm-6 col-sm-offset-2">
+          <% if @user == current_user %>
+            <h2>Bookings :</h2>
+            <% bookings = bookings_by_time(@user.bookings) %>
+            <h3>Past</h3>
+            <%= render 'users/bookings', bookings: bookings[:past] %>
+            <h3>Future</h3>
+            <%= render 'users/bookings', bookings: bookings[:future] %>
+            <h3>Present</h3>
+            <%= render 'users/bookings', bookings: bookings[:present] %>
+          <% end %>
+        </div>
+      </div>
+
+
+
+      <div class="row col-sm-12">
+        <hr>
+        <h3 class="text-center"><%= @user.first_name %> boats</h3>
+        <hr>
+        <% @user.boats.each do |boat| %>
+          <div class="col-xs-12 col-sm-4">
+            <%= link_to boat_path(boat) do %>
+              <%= render 'user_boat_cards', boat: boat %>
             <% end %>
           </div>
-          <br>
-          <div class="flex-summary">
-          <br>
-          <hr>
-            <p> <strong> . <%= b.boat_type %> </strong> </p>
-            <p> <strong> . Capacité : </strong>  <%= b.capacity %> </p>
-            <hr>
-              <div class="boat-summary-box">
-              <em> <p> <strong> Détails : </strong></p> <%= b.description[0..800].capitalize %>... </em>
-              </div>
-            <hr>
-              <%= link_to "En savoir plus !", b %>
-            <hr>
-          </div>
-        <%end %>
-      <%end %>
-
-    </div>
-
-  </div>
+        <% end %>
+      </div>
 </div>
+
+
+
