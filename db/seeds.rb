@@ -157,7 +157,7 @@ end
 
 def boats_with_reviews
   json_filepath = prompt_for_json_file("samboat")
-  JSON.parse(File.read(json_filepath)).reject { |k, v| v["reviews"].empty? || v["reviews"].nil? }
+  JSON.parse(File.read(json_filepath)).reject { |k, v| v["reviews"].blank? }
 end
 
 def create_boat_bookings(boats, past_future)

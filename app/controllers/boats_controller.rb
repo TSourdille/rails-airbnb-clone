@@ -40,7 +40,7 @@ class BoatsController < ApplicationController
       flash[:notice] = "Your boat has been added to our listing!"
       redirect_to @boat
     else
-      render 'new'
+      render 'boats/new'
     end
   end
 

@@ -121,5 +121,8 @@
   }
 
 .item {
-  max-height: 100vh;
+  max-height: 90vh;
+  img {
+    height: 100vh;
+  }
 }
