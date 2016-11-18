@@ -13,6 +13,9 @@
         <!-- Page 1 -->
         <div class="item active">
           <% if @boat.image1.nil? %>
+            <% unless @boat.photos.blank? %>
+            <%= cl_image_tag @boat.photos[0].path %>
+            <% end %>
           <% else %>
           <div class="carousel-page-for-boats" >
             <%= image_tag(@boat.image1, class: "center-block")%>
