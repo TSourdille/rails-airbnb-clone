@@ -12,19 +12,28 @@
       <div class="carousel-inner">
         <!-- Page 1 -->
         <div class="item active">
+          <% if @boat.image1.nil? %>
+          <% else %>
           <div class="carousel-page-for-boats" >
             <%= image_tag(@boat.image1, class: "center-block")%>
           </div>
+          <% end %>
         </div>
         <!-- Page 2 -->
+        <% if @boat.image2.nil? %>
+        <% else %>
         <div class="item  ">
           <%= image_tag(@boat.image2, class: "center-block")%>
         </div>
+        <% end %>
 
         <!-- Page 3 -->
+        <% if @boat.image3.nil? %>
+        <% else %>
         <div class="item center-block ">
           <%= image_tag(@boat.image3, class: "center-block") %>
         </div>
+        <% end %>
       </div>
 
 
