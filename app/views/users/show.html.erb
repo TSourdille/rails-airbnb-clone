@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 <div class="container">
       <div class="col-sm-12">
         <div class="col-sm-4">
-          <%= image_tag(get_user_photo(@user),id: "image-medium", class: "img-circle center-block") %>
+          <%= image_tag(user_photo(@user),id: "image-medium", class: "img-circle center-block") %>
           <h1> <%= @user.first_name  %> <%= @user.last_name%> </h1>
 
           <% if  @user.phone_number %>
