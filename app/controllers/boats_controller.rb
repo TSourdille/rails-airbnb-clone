@@ -1,8 +1,6 @@
 class BoatsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
-
-
   def index
     @boats = Boat.all
     if params[:destination].empty?

@@ -12,4 +12,24 @@ module BoatsHelper
     end
     equip
   end
+
+  def split_in_half(specs, half)
+    case half
+    when 1 then specs = specs.select.with_index { |s, i| i <= (specs.count)/2 }
+    when 2 then specs = specs.select.with_index { |s, i| i > (specs.count)/2 }
+    end
+    specs
+  end
+
+  def get_non_owner_user(owner)
+    User.where.not(id: owner.id).offset(rand(User.count-1)).first
+  end
+
+  def bookings_with_reviews(boat)
+    boat.bookings.where.not(user_review: nil)
+  end
+
+  def split_on_lines(text)
+    text.split("\n").map { |t| "<p>" + t + "</p>" }.join("").html_safe
+  end
 end

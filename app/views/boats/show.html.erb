@@ -1,24 +1,29 @@
 
 <div class="media">
-  <div class="media-body">
-    <div class="media-section">
-      <div class="container">
-        <%= render 'boats/boat_title', boat: @boat %>
-        <%= render 'boats/boat_photos', boat: @boat %>
-        <%= render 'boats/boat_info', boat: @boat %>
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <div class="media-body full-width">
+        <div class="media-section width: 100%;">
+          <div class="container">
+            <%= render 'boat_title', boat: @boat %>
+            <%= render 'boat_photos', boat: @boat %>
+            <%= render 'boat_info', boat: @boat %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="media-aside">
+        <div class="media-section">
+          <%= render 'boat_booking', boat: @boat, booking: @booking %>
+        </div>
+        <div class="media-section">
+          <%= render 'boat_map', boat: @boat, hash: @hash %>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="media-aside">
-    <div class="media-section">
-      <%= render 'boats/boat_booking', boat: @boat, booking: @booking %>
-    </div>
-    <div class="media-section">
-      <%= render 'boats/boat_map', boat: @boat, hash: @hash %>
-    </div>
-  </div>
 </div>
 
-<%= render 'boats/boat_owner', boat: @boat %>
-<%= render 'boats/boat_description', boat: @boat %>
+<%= render 'boats/boat_description', boat: @boat, boat: @boat %>
